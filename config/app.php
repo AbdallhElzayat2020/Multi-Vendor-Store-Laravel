@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\RepositoryProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -163,11 +164,15 @@ return [
         /*
          * Application Service Providers...
          */
+
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        // Repository Provider for Design Pattern
+        App\Providers\RepositoryProvider::class,
     ])->toArray(),
 
     /*
