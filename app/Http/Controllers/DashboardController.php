@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\View;
 
 class DashboardController extends Controller
 {
+
+    // check auth if user is not authed then redirect to login
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
 

@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('layouts.head')
-
-
-
+@include('layouts.partials.head')
 
 <body>
 
@@ -35,7 +32,7 @@
 
     @include('layouts.partials.footer')
 
-    @include('layouts.scripts')
+    @include('layouts.partials.scripts')
 
 
 </body>
