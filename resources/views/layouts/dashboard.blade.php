@@ -3,16 +3,28 @@
 
 @include('layouts.head')
 
+
+
+
 <body>
 
-    @include('layouts.header')
+    @include('layouts.partials.header')
 
-    @include('layouts.sidebar')
+    @include('layouts.partials.sidebar')
 
     <main id="main" class="main">
 
         {{-- breadcrumb --}}
-        @yield('breadcrumb')
+        <div class="pagetitle">
+            <h1>Dashboard</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    @yield('breadcrumb')
+                </ol>
+            </nav>
+        </div>
+
         {{-- breadcrumb --}}
 
 
@@ -21,9 +33,10 @@
     </main>
     <!-- End #main -->
 
-    @include('layouts.footer')
+    @include('layouts.partials.footer')
 
     @include('layouts.scripts')
+
 
 </body>
 

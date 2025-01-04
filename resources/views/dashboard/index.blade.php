@@ -2,18 +2,15 @@
 
 
 @section('title', ' Home - Dashboard')
+{{-- <title>{{ config('app.name', 'Multi Vendor') }}</title> --}}
 
+@push('css')
+    <link rel="stylesheet" href="style.css">
+@endpush
 
 @section('breadcrumb')
-    <div class="pagetitle">
-        <h1>Dashboard</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
-        </nav>
-    </div>
+    {{-- for active breadcrumb --}}
+    <li class="breadcrumb-item active">Home</li>
 @endsection
 <!-- End Page Title -->
 
@@ -141,7 +138,5 @@
 @endsection
 
 
-</main>
-</body>
-
-</html>
+@push('js')
+@endpush
