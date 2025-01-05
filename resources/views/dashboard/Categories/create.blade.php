@@ -8,14 +8,13 @@
 @endpush
 @section('breadcrumb')
     {{-- for active breadcrumb --}}
-    <li class="breadcrumb-item active">page title</li>
+    <li class="breadcrumb-item active">Create Category</li>
 @endsection
 <!-- End Page Title -->
 
 @section('content')
     <section class="section dashboard">
         <div class="row">
-
 
         </div>
     </section>

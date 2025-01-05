@@ -1,23 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard\Products;
 
-use App\Interfaces\Categories\CategoryRepositoryInterface;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class ProductController extends Controller
 {
-
-    protected $category;
-
-    public function __construct(CategoryRepositoryInterface $category)
-    {
-        $this->category = $category;
-    }
-
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        return  "test";
+        //
     }
 
     /**
