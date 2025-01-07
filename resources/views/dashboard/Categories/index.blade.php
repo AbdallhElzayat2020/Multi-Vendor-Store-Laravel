@@ -16,12 +16,14 @@
 
 @section('content')
     <section class="section dashboard mt-5">
+        {{-- success message --}}
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>{{ session('success') }}</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
+        {{-- error message --}}
         @foreach ($errors->all() as $error)
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>{{ $error }}</strong>

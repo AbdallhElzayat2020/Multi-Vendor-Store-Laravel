@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard\Categories;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Interfaces\Categories\CategoryRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,7 @@ class CategoryController extends Controller
         return $this->category->create();
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         return $this->category->store($request);
     }
@@ -39,7 +40,7 @@ class CategoryController extends Controller
         return $this->category->edit($id);
     }
 
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         return  $this->category->update($request, $id);
     }

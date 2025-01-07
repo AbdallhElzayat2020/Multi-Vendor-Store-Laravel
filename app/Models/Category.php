@@ -20,6 +20,17 @@ class Category extends Model
         'parent_id',
     ];
 
+    // protected static function rules($id)
+    // {
+    //     return [
+    //         'name' => 'required|string|min:3|max:255|unique:categories,name,' . $this->id,
+    //         'description' => 'nullable|string',
+    //         'status' => 'required|in:archived,active',
+    //         'parent_id' => 'nullable|integer|exists:categories,id',
+    //         'image' => 'nullable|image|mimes:jpeg,png,jpg|max:1048576|mimetypes:mimetypes:image/jpeg,image/png,image/gif',
+    //     ];
+    // }
+
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id');
