@@ -24,7 +24,9 @@
             @csrf
             @method('POST')
 
-            @include('dashboard.Categories._form')
+            @include('dashboard.Categories._form', [
+                'button_lable' => 'Create',
+            ])
 
         </form>
     </section>

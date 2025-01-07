@@ -19,7 +19,9 @@
             @csrf
             @method('PUT')
             {{-- <input type="hidden" name="id" value="{{ $category->id }}"> --}}
-            @include('dashboard.Categories._form')
+            @include('dashboard.Categories._form', [
+                'button_lable' => 'Update',
+            ])
         </form>
     </section>
 @endsection

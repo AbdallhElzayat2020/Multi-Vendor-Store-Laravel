@@ -7,7 +7,7 @@
 {{-- Image --}}
 <div class="col-md-6">
     <label for="image" class="form-label">Category Image</label>
-    <input type="file" name="image" class="form-control">
+    <input type="file" name="image" class="form-control" accept="image/*">
     @if ($category->image)
         <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}" class="img-thumbnail mt-2"
             style="width: 100px">
@@ -51,5 +51,6 @@
 </div>
 
 <div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    {{-- <button type="submit" class="btn btn-primary">{{ isset($category) ? 'Update' : 'Create' }}</button> --}}
+    <button type="submit" class="btn btn-primary">{{ $button_lable ?? 'Save' }}</button>
 </div>

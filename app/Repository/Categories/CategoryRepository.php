@@ -55,13 +55,6 @@ class CategoryRepository implements CategoryRepositoryInterface
 
             return redirect()->route('dashboard.categories.index')->with('error', $th->getMessage());
         }
-
-        //or
-
-        // $category = new Category($request->all());
-        // $category->slug = Str::slug($request->name);
-        // $category->save();
-
         return redirect()->route('dashboard.categories.index')->with('success', 'Category created successfully');
     }
     public function edit($id)
@@ -70,7 +63,7 @@ class CategoryRepository implements CategoryRepositoryInterface
         try {
             $category = Category::findOrFail($id);
 
-            // to make sure that the id is not the same because not logic make category Parent for itself
+            // we make that category id is not the same because not logic make category Parent for itself
 
             $parents = Category::where('id', '!=', $category->id)
                 ->where(function ($query) use ($id) {

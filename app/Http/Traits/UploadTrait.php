@@ -7,19 +7,33 @@ use Illuminate\Support\Str;
 
 trait UploadTrait
 {
-    public function uploadFile(Request $request, $inputname, $foldername, $disk)
+    public function uploadFile(Request $request, $foldername, $inputname, $disk)
     {
-        if ($request->hasFile('image')) {
+        // if (!$request->hasFile($inputname)) {
+        //     return null;
+        // }
 
-            $file = $request->file('imgae');
+        // $file = $request->file($inputname);
 
-            $path = $file->storeAs('uploads', $foldername, $disk);
+        // $path = $file->store($foldername, $disk);
 
-            $request->merge([
+        // $request->merge([
 
-                $inputname => $path
+        //     $inputname => $path
 
-            ]);
+        // ]);
+
+
+
+        if ($request->hasFile($inputname)) {
+
+            $file = $request->file($inputname);
+
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+
+            $path = $file->storeAs($foldername, $filename, $disk);
         }
+
+        return $request->file($path);
     }
 }
