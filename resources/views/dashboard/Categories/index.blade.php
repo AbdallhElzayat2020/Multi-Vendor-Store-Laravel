@@ -65,12 +65,11 @@
                                 </td>
                                 <td>
                                     @if ($category->image == null)
-                                        <span class="badge bg-danger">No Image</span>
+                                        <span class="badge bg-danger">No Image Available</span>
                                     @else
-                                        <img src="{{ $category->image }}" alt="{{ $category->name }}" width="80"
-                                            height="80">
+                                        <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}"
+                                            width="80" height="80" class="img-thumbnail">
                                     @endif
-
                                 </td>
                                 <td>{{ $category->created_at->diffForHumans() }}</td>
                                 <td>
