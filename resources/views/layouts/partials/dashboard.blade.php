@@ -7,7 +7,8 @@
 
     @include('layouts.partials.header')
 
-    @include('layouts.partials.sidebar')
+    {{-- @include('layouts.partials.sidebar') --}}
+    <x-Nav />
 
     <main id="main" class="main">
 
