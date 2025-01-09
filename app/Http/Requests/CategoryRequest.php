@@ -35,6 +35,12 @@ class CategoryRequest extends FormRequest
             'status' => 'required|in:archived,active',
             'parent_id' => 'nullable|integer|exists:categories,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:1048576',
+            // custom validation
+            function ($attribute, $value, $fails) {
+                if (strtolower($value) == 'laravel') {
+                    $fails('This name is not allowed');
+                }
+            },
 
             // dimensions:min_width=100,min_height=100
         ];
