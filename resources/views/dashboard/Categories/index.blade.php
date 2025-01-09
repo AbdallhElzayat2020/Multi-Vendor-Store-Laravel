@@ -16,20 +16,10 @@
 
 @section('content')
     <section class="section dashboard mt-5">
-        {{-- success message --}}
-        @if (session()->has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>{{ session('success') }}</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-        {{-- error message --}}
-        @foreach ($errors->all() as $error)
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>{{ $error }}</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endforeach
+        {{-- alert messages Components --}}
+        <x-alert type="success" />
+        <x-alert type="danger" />
+        {{-- end alert messages --}}
         <div class="row mt-4">
             <div class="col-lg-12">
                 <a class="btn btn-primary mb-4" href="{{ route('dashboard.categories.create') }}">Add Category</a>
