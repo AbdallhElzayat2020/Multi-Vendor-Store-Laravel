@@ -2,12 +2,49 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
     use HasFactory;
+
+
+
+    // scope
+    public function scopeActive(Builder $builder)
+    {
+        $builder->where('status', '=', 'active');
+    }
+
+    public function scopeFilter(Builder $builder, $filters)
+    {
+        $builder->when($filters['name'] ?? false, function ($builder, $value) {
+            $builder->where('name', 'LIKE', "%{$value}%");
+        });
+
+        $builder->when($filters['status'] ?? false, function ($builder, $value) {
+            $builder->where('status', $value);
+        });
+
+
+        // or 
+
+        // if ($filters['name'] ?? false) {
+        //     $builder->where('name', 'LIKE', "%{$filters['name']}%");
+        // }
+
+        // if ($filters['status'] ?? false) {
+        //     $builder->where('status', $filters['status']);
+        // }
+
+
+    }
+
+
+
+
 
     protected $table = 'categories';
 
@@ -20,17 +57,7 @@ class Category extends Model
         'parent_id',
     ];
 
-    // protected static function rules($id)
-    // {
-    //     return [
-    //         'name' => 'required|string|min:3|max:255|unique:categories,name,' . $this->id,
-    //         'description' => 'nullable|string',
-    //         'status' => 'required|in:archived,active',
-    //         'parent_id' => 'nullable|integer|exists:categories,id',
-    //         'image' => 'nullable|image|mimes:jpeg,png,jpg|max:1048576|mimetypes:mimetypes:image/jpeg,image/png,image/gif',
-    //     ];
-    // }
-
+    // relationship for show Category Name
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id');
