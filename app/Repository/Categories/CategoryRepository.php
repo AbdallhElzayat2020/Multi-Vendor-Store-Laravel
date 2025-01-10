@@ -5,6 +5,7 @@ namespace App\Repository\Categories;
 use App\Interfaces\Categories\CategoryRepositoryInterface;
 use App\Models\Category;
 use Exception;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -13,9 +14,21 @@ class CategoryRepository implements CategoryRepositoryInterface
 
 
 
-    public function index()
+    public function index($request)
     {
-        $categories = Category::paginate(10);  // return Collection
+        $query = Category::query();
+
+        // $name = $request->query('name');
+        if ($name = $request->query('name')) {
+            $query->where('name', 'LIKE', "%{$name}%");
+        }
+
+        // $status = $request->query('status');
+        if ($status = $request->query('status')) {
+            $query->where('status', $status);
+        }
+
+        $categories = $query->paginate(2);  // return Collection
         // $categories = DB::table('categories')->get();
         return view('dashboard.Categories.index', compact('categories'));
     }

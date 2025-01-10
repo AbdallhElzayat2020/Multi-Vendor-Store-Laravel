@@ -5,7 +5,7 @@ namespace App\Interfaces\Categories;
 
 interface CategoryRepositoryInterface
 {
-    public function index();
+    public function index($request);
     public function create();
     public function store($request);
     public function edit($id);

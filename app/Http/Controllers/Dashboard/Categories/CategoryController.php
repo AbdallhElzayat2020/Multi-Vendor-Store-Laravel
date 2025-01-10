@@ -20,9 +20,9 @@ class CategoryController extends Controller
         $this->category = $category;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->category->index();
+        return $this->category->index($request);
     }
 
     public function create()

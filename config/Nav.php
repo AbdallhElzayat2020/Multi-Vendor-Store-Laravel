@@ -20,5 +20,11 @@ return [
         'route' => 'dashboard.products.index',
         'title' => 'Products',
         'active' => 'dashboard.products.*'
+    ],
+    [
+        'icon' => 'ri-account-pin-box-fill',
+        'route' => 'dashboard.products.index',
+        'title' => 'Users',
+        'active' => 'dashboard.users.*'
     ]
 ];
