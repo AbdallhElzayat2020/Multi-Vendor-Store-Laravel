@@ -1,7 +1,7 @@
 @extends('layouts.partials.dashboard')
 
 
-@section('title', 'Categories')
+@section('title', 'Trashed Categories')
 
 @push('css')
     {{-- add new css here --}}
@@ -10,7 +10,8 @@
 @section('breadcrumb')
     {{-- for active breadcrumb --}}
     <li class="breadcrumb-item active">
-        Categories</li>
+        Deleted Categories
+    </li>
 @endsection
 <!-- End Page Title -->
 
@@ -22,8 +23,7 @@
         {{-- end alert messages --}}
         <div class="row mt-4">
             <div class="col-lg-12">
-                <a class="btn btn-primary mb-4 mx-2" href="{{ route('dashboard.categories.create') }}">Add Category</a>
-                <a class="btn btn-primary mb-4 mx-2" href="{{ route('dashboard.categories.trash') }}">Trash</a>
+                <a class="btn btn-primary mb-4" href="{{ route('dashboard.categories.index') }}">Back</a>
 
                 {{-- seacrh form and filter status --}}
                 <form action="{{ URL::current() }}" method="get" class="my-4">
@@ -47,10 +47,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Parent</th>
                             <th>Status</th>
                             <th>Image</th>
-                            <th>Created_at</th>
+                            <th>Deleted_at</th>
                             <th colspan="2">Actions</th>
                         </tr>
                     </thead>
@@ -60,13 +59,6 @@
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{ $category->name }}</td>
-                                <td>
-                                    @if ($category->parent)
-                                        {{ $category->parent->name }}
-                                    @else
-                                        <span class="badge bg-primary">Primary Category</span>
-                                    @endif
-                                </td>
                                 <td>
                                     @if ($category->status == 'active')
                                         <span class="badge bg-success">Active</span>
@@ -83,18 +75,20 @@
                                             width="80" height="80" class="img-thumbnail">
                                     @endif
                                 </td>
-                                <td>{{ $category->created_at->diffForHumans() }}</td>
+                                <td>{{ $category->deleted_at->diffForHumans() }}</td>
                                 <td>
-                                    <a href="{{ route('dashboard.categories.edit', $category->id) }}"
-                                        class="btn btn-sm btn-outline-success">Edit
-                                    </a>
+                                    <button type="button" class="btn btn-sm btn-outline-info" data-bs-toggle="modal"
+                                        data-bs-target="#restore{{ $category->id }}">
+                                        Restore
+                                    </button>
                                     <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
                                         data-bs-target="#delete{{ $category->id }}">
-                                        Delete
+                                        Force Delete
                                     </button>
                                 </td>
                             </tr>
-                            @include('dashboard.Categories.delete')
+                            @include('dashboard.Categories.forDelete')
+                            @include('dashboard.Categories.restore')
 
                         @empty
                             <tr class="text-center">

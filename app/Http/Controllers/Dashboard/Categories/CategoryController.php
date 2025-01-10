@@ -13,8 +13,6 @@ class CategoryController extends Controller
     protected $category;
 
 
-
-
     public function __construct(CategoryRepositoryInterface $category)
     {
         $this->category = $category;
@@ -45,8 +43,22 @@ class CategoryController extends Controller
         return  $this->category->update($request, $id);
     }
 
+    public function trash()
+    {
+        return  $this->category->trash();
+    }
+
     public function destroy($id)
     {
         return  $this->category->destroy($id);
+    }
+
+    public function restore($id)
+    {
+        return $this->category->restore($id);
+    }
+    public function forceDelete($id)
+    {
+        return $this->category->forceDelete($id);
     }
 }

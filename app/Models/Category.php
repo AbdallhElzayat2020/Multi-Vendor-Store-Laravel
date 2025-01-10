@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-    use HasFactory;
-
+    use HasFactory, SoftDeletes;
 
 
     // scope
@@ -20,30 +20,23 @@ class Category extends Model
 
     public function scopeFilter(Builder $builder, $filters)
     {
-        $builder->when($filters['name'] ?? false, function ($builder, $value) {
-            $builder->where('name', 'LIKE', "%{$value}%");
-        });
+        // $builder->when($filters['name'] ?? false, function ($builder, $value) {
+        //     $builder->where('name', 'LIKE', "%{$value}%");
+        // });
 
-        $builder->when($filters['status'] ?? false, function ($builder, $value) {
-            $builder->where('status', $value);
-        });
-
+        // $builder->when($filters['status'] ?? false, function ($builder, $value) {
+        //     $builder->where('status', $value);
+        // });
 
         // or 
+        if ($filters['name'] ?? false) {
+            $builder->where('name', 'LIKE', "%{$filters['name']}%");
+        }
 
-        // if ($filters['name'] ?? false) {
-        //     $builder->where('name', 'LIKE', "%{$filters['name']}%");
-        // }
-
-        // if ($filters['status'] ?? false) {
-        //     $builder->where('status', $filters['status']);
-        // }
-
-
+        if ($filters['status'] ?? false) {
+            $builder->where('status', $filters['status']);
+        }
     }
-
-
-
 
 
     protected $table = 'categories';

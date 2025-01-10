@@ -11,4 +11,7 @@ interface CategoryRepositoryInterface
     public function edit($id);
     public function update($request, $id);
     public function destroy($id);
+    public function trash();
+    public function restore($id);
+    public function forceDelete($id);
 }

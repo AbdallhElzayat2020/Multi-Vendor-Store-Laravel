@@ -42,7 +42,8 @@ class CategoryRepository implements CategoryRepositoryInterface
 
 
         $query = Category::query();
-        $categories = Category::Filter($request->query())->paginate(2);
+        $categories = Category::Filter($request->query())
+            ->paginate(2);
 
         // return $categories;
         return view('dashboard.Categories.index', compact('categories'));
@@ -151,6 +152,7 @@ class CategoryRepository implements CategoryRepositoryInterface
         }
     }
 
+
     public function destroy($id)
     {
 
@@ -158,13 +160,46 @@ class CategoryRepository implements CategoryRepositoryInterface
             $category = Category::findOrFail($id);
             $category->delete();
 
-            if ($category->image) {
-                Storage::disk('public')->delete($category->image);
-            }
+
+
+
+            // if ($category->image) {
+            //     Storage::disk('public')->delete($category->image);
+            // }
 
             return redirect()->route('dashboard.categories.index')->with('success', 'Category deleted successfully');
         } catch (Exception $e) {
             return redirect()->route('dashboard.categories.index')->with('error', $e->getMessage());
         }
+    }
+
+    public function trash()
+    {
+        $categories = Category::onlyTrashed()->paginate(2);
+        return view('dashboard.Categories.trash', compact('categories'));
+    }
+
+    public function restore($id)
+    {
+        $category = Category::onlyTrashed()->findOrFail($id);
+        $category->restore();
+        return redirect()->route('dashboard.categories.trash')
+            ->with('success', 'Category restored successfully');
+
+        $category = Category::onlyTrashed()->findOrFail($id);
+    }
+
+    public function forceDelete($id)
+    {
+        $category = Category::onlyTrashed()->findOrFail($id);
+
+        $category->forceDelete();
+
+        // delete image from storage
+        if ($category->image) {
+            Storage::disk('public')->delete($category->image);
+        }
+        return redirect()->route('dashboard.categories.trash')
+            ->with('success', 'Category deleted successfully');
     }
 }
