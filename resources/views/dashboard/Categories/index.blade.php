@@ -18,6 +18,7 @@
     <section class="section dashboard mt-5">
         {{-- alert messages Components --}}
         <x-alert type="success" />
+
         <x-alert type="danger" />
         {{-- end alert messages --}}
         <div class="row mt-4">
