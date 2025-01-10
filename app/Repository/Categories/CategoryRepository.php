@@ -42,6 +42,7 @@ class CategoryRepository implements CategoryRepositoryInterface
                 $file = $request->file('image');
 
                 $path = $file->store('uploads', 'public');
+
                 $request->merge([
 
                     $data['image'] = $path
