@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Store;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -31,6 +32,7 @@ class UserSeeder extends Seeder
             'email' => "user@gmail.com",
             'password' => Hash::make('password'), //  password
             'phone_number' => '0123456788',
+            'store_id' => Store::all()->random()->id,
         ]);
 
         // query builder
@@ -39,6 +41,8 @@ class UserSeeder extends Seeder
             'email' => "admin@gmail.com",
             'password' => Hash::make('password'), //  password
             'phone_number' => '0123456789',
+            'store_id' => Store::all()->random()->id,
+
         ]);
     }
 }

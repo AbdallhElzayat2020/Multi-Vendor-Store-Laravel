@@ -3,18 +3,26 @@
 namespace App\Http\Controllers\Dashboard\Products;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\Products\ProductRepositoryInterface;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
+    protected $product;
+
+    public function __construct(ProductRepositoryInterface $product)
+    {
+        $this->product = $product;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $products = Product::paginate(10);
-        return view('dashboard.Products.index', compact('products'));
+        return $this->product->index();
     }
 
     /**
@@ -22,7 +30,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return $this->product->create();
     }
 
     /**
@@ -30,23 +38,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return $this->product->store($request);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        return $this->product->edit($id);
     }
 
     /**
@@ -54,7 +54,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return $this->product->update($request);
     }
 
     /**
@@ -62,6 +62,6 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return $this->product->destroy($id);
     }
 }

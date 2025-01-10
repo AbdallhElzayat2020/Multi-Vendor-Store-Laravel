@@ -15,7 +15,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::group([
     'prefix' => 'dashboard',
     'as' => 'dashboard.',
-    'middleware' => ['auth', 'verified']
+    // 'middleware' => ['auth', 'verified']
+    'middleware' => ['auth']
 ], function () {
 
 
