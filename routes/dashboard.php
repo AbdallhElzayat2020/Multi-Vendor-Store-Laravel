@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\Categories\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\Products\ProductController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -31,5 +32,5 @@ Route::group([
     Route::resource('categories', CategoryController::class);
 
 
-    Route::resource('products', CategoryController::class);
+    Route::resource('products', ProductController::class);
 });

@@ -8,7 +8,6 @@ slug (unique)
 description
 category_id (FK)
 store_id (FK)
-parent_id (FK) foreign key in products table
 price
 images
 created_at
