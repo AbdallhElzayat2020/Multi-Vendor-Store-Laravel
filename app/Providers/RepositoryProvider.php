@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Interfaces\Categories\CategoryRepositoryInterface;
 use App\Interfaces\Products\ProductRepositoryInterface;
+use App\Interfaces\Profile\ProfileRepositoryInterface;
 use App\Repository\Categories\CategoryRepository;
 use App\Repository\Products\ProductRepository;
+use App\Repository\Profile\ProfileRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryProvider extends ServiceProvider
@@ -17,6 +19,7 @@ class RepositoryProvider extends ServiceProvider
     {
         $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
+        $this->app->bind(ProfileRepositoryInterface::class, ProfileRepository::class);
     }
 
     /**

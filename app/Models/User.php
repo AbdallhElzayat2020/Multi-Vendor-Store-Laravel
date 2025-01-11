@@ -49,4 +49,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // profile relationship
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'user_id', 'id')
+            ->withDefault();
+    }
 }

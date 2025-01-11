@@ -181,9 +181,11 @@
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                 <li class="dropdown-header">
                     <h6>
-                        @auth
-                            {{ Auth::user()->name }}
-                        @endauth
+                        <a href="{{ route('dashboard.profile.edit') }}">
+                            @auth
+                                {{ Auth::user()->name }}
+                            @endauth
+                        </a>
                     </h6>
                     <span>
                         @auth
