@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard\Categories;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Interfaces\Categories\CategoryRepositoryInterface;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -31,6 +32,10 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         return $this->category->store($request);
+    }
+    public function show(Category $category)
+    {
+        return $this->category->show($category);
     }
 
     public function edit($id)

@@ -51,7 +51,7 @@
                             <th>Category Name</th>
                             <th>Status</th>
                             <th>Image</th>
-                            <th>Store_id</th>
+                            <th>Store Name</th>
                             <th>Created_at</th>
                             <th colspan="2">Actions</th>
                         </tr>
@@ -64,7 +64,7 @@
                                 <td>{{ $product->name }}</td>
                                 <td>
                                     @if ($product->category_id)
-                                        {{ $product->category_id }}
+                                        {{ $product->category->name }}
                                     @else
                                         <span class="badge bg-danger">No Category</span>
                                     @endif
@@ -85,7 +85,7 @@
                                             width="80" height="80" class="img-thumbnail">
                                     @endif
                                 </td>
-                                <td>{{ $product->store_id }}</td>
+                                <td>{{ $product->store->name }}</td>
                                 <td>{{ $product->created_at->diffForHumans() }}</td>
                                 <td>
                                     <a href="{{ route('dashboard.products.edit', $product->id) }}"

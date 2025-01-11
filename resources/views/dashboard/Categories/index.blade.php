@@ -49,25 +49,28 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Parent</th>
+                            <th>Product Number</th>
                             <th>Status</th>
                             <th>Image</th>
                             <th>Created_at</th>
                             <th colspan="2">Actions</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         @forelse ($categories as $key=> $category)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td>{{ $category->name }}</td>
+                                <td><a href="{{ route('dashboard.categories.show', $category->id) }}">
+                                        {{ $category->name }}
+                                    </a>
+                                </td>
                                 <td>
                                     @if ($category->parent)
                                         {{ $category->parent->name }}
-                                    @else
-                                        <span class="badge bg-primary">Primary Category</span>
                                     @endif
                                 </td>
+                                {{-- count of products in Category --}}
+                                <td>{{ $category->products->count() }}</td>
                                 <td>
                                     @if ($category->status == 'active')
                                         <span class="badge bg-success">Active</span>

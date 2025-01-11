@@ -50,9 +50,24 @@ class Category extends Model
         'parent_id',
     ];
 
+
+    // relationship Products on category
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     // relationship for show Category Name
     public function parent()
     {
-        return $this->belongsTo(Category::class, 'parent_id');
+        return $this->belongsTo(Category::class, 'parent_id', 'id')
+            ->withDefault([
+                'name' => 'No Parent'
+            ]);
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id', 'id');
     }
 }

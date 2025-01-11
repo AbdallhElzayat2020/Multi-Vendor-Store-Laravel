@@ -1,5 +1,4 @@
 <aside id="sidebar" class="sidebar">
-
     <ul class="sidebar-nav" id="sidebar-nav">
         @foreach ($items as $item)
             <li class="nav-item">

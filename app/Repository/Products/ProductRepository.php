@@ -11,8 +11,7 @@ class ProductRepository implements ProductRepositoryInterface
 {
     public function index()
     {
-
-        $products = Product::paginate(10);
+        $products = Product::with(['store', 'category'])->paginate(10);
 
         return view('dashboard.Products.index', compact('products'));
     }

@@ -42,14 +42,13 @@ class CategoryRepository implements CategoryRepositoryInterface
 
 
         $query = Category::query();
-        $categories = Category::Filter($request->query())
-            ->paginate(2);
+        $categories = Category::with('parent')
+            // filter scope
+            ->filter($request->query())
+            ->paginate(10);
 
         // return $categories;
         return view('dashboard.Categories.index', compact('categories'));
-
-
-        //
     }
     public function create()
     {
@@ -90,6 +89,12 @@ class CategoryRepository implements CategoryRepositoryInterface
         }
         return redirect()->route('dashboard.categories.index')->with('success', 'Category created successfully');
     }
+
+    public function show(Category $category)
+    {
+        return view('dashboard.Categories.show', compact('category'));
+    }
+
     public function edit($id)
     {
 
