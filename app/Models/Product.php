@@ -12,7 +12,7 @@ class Product extends Model
 
 
 
-    //Global scope for check store Id 
+    //Global scope for check store Id
     protected static function booted()
     {
         static::addGlobalScope(StoreScope::class);
@@ -42,5 +42,17 @@ class Product extends Model
     public function store()
     {
         return $this->belongsTo(Store::class, 'store_id', 'id');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(
+            Tag::class,
+            'product_tag',
+            'product_id',
+            'tag_id',
+            'id',
+            'id'
+        );
     }
 }

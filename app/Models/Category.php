@@ -28,7 +28,7 @@ class Category extends Model
         //     $builder->where('status', $value);
         // });
 
-        // or 
+        // or
         if ($filters['name'] ?? false) {
             $builder->where('name', 'LIKE', "%{$filters['name']}%");
         }
@@ -37,7 +37,6 @@ class Category extends Model
             $builder->where('status', $filters['status']);
         }
     }
-
 
     protected $table = 'categories';
 
