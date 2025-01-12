@@ -27,6 +27,7 @@ class ProductRepository implements ProductRepositoryInterface
     {
 
         $product = Product::findOrFail($id);
+        return view('dashboard.Products.edit', compact('product'));
     }
     public function update($request)
     {

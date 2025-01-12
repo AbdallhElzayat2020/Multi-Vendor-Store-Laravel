@@ -51,8 +51,8 @@ class Product extends Model
             'product_tag',
             'product_id',
             'tag_id',
-            'id',
-            'id'
+            // 'id',
+            // 'id'
         );
     }
 }
