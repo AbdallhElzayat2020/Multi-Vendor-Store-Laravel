@@ -43,15 +43,14 @@ class Product extends Model
         return $this->belongsTo(Store::class, 'store_id', 'id');
     }
 
+    // relationship for tags
     public function tags()
     {
         return $this->belongsToMany(
             Tag::class,
             'product_tag',
             'product_id',
-            'tag_id',
-            'id',
-            'id'
+            'tag_id'
         );
     }
 }

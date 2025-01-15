@@ -16,10 +16,9 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::group([
     'prefix' => 'dashboard',
     'as' => 'dashboard.',
+    'middleware' => ['auth'],
     // 'middleware' => ['auth', 'verified']
-    'middleware' => ['auth']
 ], function () {
-
 
     // soft delete routes
     Route::get('categories/trash', [CategoryController::class, 'trash'])
