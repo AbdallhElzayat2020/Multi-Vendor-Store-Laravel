@@ -85,6 +85,11 @@ class ProductRepository implements ProductRepositoryInterface
     }
     public function destroy($id)
     {
-        //
+
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return redirect()->route('dashboard.products.index')
+            ->with('success', 'Product Deleted Successfully');
     }
 }
