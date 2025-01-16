@@ -15,7 +15,8 @@ class HomeController extends Controller
         // $products = Product::Active()->limit(8)->get();
         $products = Product::with('category')
             ->Active()
-            ->take(8)->get();
+            ->take(8)
+            ->get();
         return view('front.home', compact('products'));
     }
 }

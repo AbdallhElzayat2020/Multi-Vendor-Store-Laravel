@@ -6,6 +6,8 @@ use App\Models\Scopes\StoreScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -58,5 +60,26 @@ class Product extends Model
             'product_id',
             'tag_id'
         );
+    }
+
+    public function getImageDefaultAttribute()
+    {
+        return 'https://www.theseasonedhome.com/content/images/thumbs/default-image_450.png';
+
+        // if (!$this->image) {
+        //     return 'https://www.theseasonedhome.com/content/images/thumbs/default-image_450.png';
+        // }
+        // if (Str::startsWith($this->image, ['http://', 'https://'])) {
+        //     return $this->image;
+        // }
+        // return asset('storage/' . $this->image);
+    }
+    public function getSalePercentAttribute()
+    {
+        if (!$this->compare_price) {
+            return 0;
+        }
+
+        return round(100 - ($this->price / $this->compare_price) * 100, 2);
     }
 }
