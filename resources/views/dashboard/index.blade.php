@@ -5,7 +5,7 @@
 {{-- <title>{{ config('app.name', 'Multi Vendor') }}</title> --}}
 
 @push('css')
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ asset('assets/frontend/style.css') }}">
 @endpush
 
 @section('breadcrumb')

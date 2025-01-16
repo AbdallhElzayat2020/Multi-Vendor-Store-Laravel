@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Scopes\StoreScope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +19,11 @@ class Product extends Model
         static::addGlobalScope(StoreScope::class);
     }
 
+
+    public function scopeActive(Builder $builder)
+    {
+        $builder->where('status', 'active');
+    }
     protected $fillable = [
         'name',
         'slug',
