@@ -16,8 +16,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::group([
     'prefix' => 'dashboard',
     'as' => 'dashboard.',
-    'middleware' => ['auth'],
-    // 'middleware' => ['auth', 'verified']
+    'middleware' => ['auth', 'auth.type:super-admin,admin'],
 ], function () {
 
     // soft delete routes

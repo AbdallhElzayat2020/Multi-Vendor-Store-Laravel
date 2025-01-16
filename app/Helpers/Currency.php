@@ -11,7 +11,6 @@ class Currency
         $formatter = new NumberFormatter(config('app.locale'), NumberFormatter::CURRENCY);
 
         if ($currency == null) {
-
             $currency = config('app.currency', 'USD');
         }
 
