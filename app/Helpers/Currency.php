@@ -6,6 +6,11 @@ use NumberFormatter;
 
 class Currency
 {
+    public function __invoke(...$prams)
+    {
+        return static::format(...$prams);
+    }
+
     public static function format($amount, $currency = null)
     {
         $formatter = new NumberFormatter(config('app.locale'), NumberFormatter::CURRENCY);

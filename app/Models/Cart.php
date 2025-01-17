@@ -12,8 +12,10 @@ class Cart extends Model
 
     use HasFactory;
 
+    // turn off increment id
     public $incrementing = false;
 
+    // fillable
     protected $fillable = [
         'user_id',
         'cookie_id',
@@ -22,21 +24,23 @@ class Cart extends Model
         'options',
     ];
 
-    // observer
+    // observer for Cart
     public static function booted()
     {
         static::observe(CartObserver::class);
     }
 
-    public function product()
-    {
-        return $this->belongsTo(Product::class, 'product_id');
-    }
-
+    //relationship for user with Cart
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id')->withDefault([
-            'name' => 'Guest',
+            'name' => 'Anonymous',
         ]);
+    }
+
+    //relationship for product with Cart
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
     }
 }

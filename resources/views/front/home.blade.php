@@ -197,9 +197,8 @@
                                 <div class="product-image">
                                     <img src="https://via.placeholder.com/335x335" alt="#">
                                     <div class="button">
-                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i>
-                                            Add to
-                                            Cart</a>
+                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add
+                                            to Cart</a>
                                     </div>
                                 </div>
                                 <div class="product-info">

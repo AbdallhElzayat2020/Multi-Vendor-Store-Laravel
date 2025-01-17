@@ -103,8 +103,8 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-3 col-7">
                         <!-- Start Header Logo -->
-                        <a class="navbar-brand" href="index.html">
-                            <img src="{{ asset('assets/frontend/images/logo/logo.svg') }}" alt="Logo">
+                        <a class="navbar-brand" href="{{ route('home') }}">
+                            <img src="{{ asset('assets/frontend/images/logo/logo.svg') }}" alt="Website Logo">
                         </a>
                         <!-- End Header Logo -->
                     </div>
@@ -356,9 +356,9 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-4 col-12">
                             <div class="footer-logo">
-                                <a href="index.html">
+                                <a href="{{ route('home') }}">
                                     <img src="{{ asset('assets/frontend/images/logo/white-logo.svg') }}"
-                                        alt="#">
+                                        alt="Website Logo">
                                 </a>
                             </div>
                         </div>
