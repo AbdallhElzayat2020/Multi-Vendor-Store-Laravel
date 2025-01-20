@@ -25,7 +25,6 @@ class UserSeeder extends Seeder
         // $user->phone_number = rand(123456789, 9999999999);
         // $user->save();
 
-
         // create method
         User::create([
             'name' => "user",
