@@ -36,7 +36,7 @@ class CartController extends Controller
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
-            'quantity' => 'nullable|integer|min:1',
+            'quantity' => 'nullable|int|min:1',
         ]);
         $quantity = $request->post('quantity');
         $product_id = $request->post('product_id');
@@ -50,17 +50,13 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'quantity' => ['required', 'int', 'exists:products,id'],
-            'product_id' => ['nullable', 'int', 'min:1'],
+            'quantity' => ['required', 'int', 'min:1'],
         ]);
-        $quantity = $request->post('quantity');
-        $product = Product::findOrFail($id);
-        $this->cart->update($product, $quantity);
-        return redirect()->route('cart.index')
-            ->with('success', 'Product updated in cart');
+
+        $this->cart->update($id, $request->post('quantity'));
     }
 
     /**
@@ -69,5 +65,8 @@ class CartController extends Controller
     public function destroy($id)
     {
         $this->cart->delete($id);
+        return [
+            'message' => 'Product removed from cart'
+        ];
     }
 }

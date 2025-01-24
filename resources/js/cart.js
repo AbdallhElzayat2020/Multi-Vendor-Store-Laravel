@@ -1,12 +1,28 @@
 (function ($) {
-    $(".item-quantity").on("click", function (e) {
+    $(".item-quantity").on("change", function (e) {
         $.ajax({
-            URL: "cart/" + $(this).data("id"),
+            url: "cart/" + $(this).data("id"),
             method: "POST",
             data: {
-                quantity: $(this).data("quantity"),
+                quantity: $(this).val(),
+                _method: "PUT",
                 _token: csrf_token,
             },
         });
     });
-})(JQuery);
+
+    $(".remove-item").on("click", function (e) {
+        let id = $(this).data("id");
+        $.ajax({
+            url: "cart/" + id,
+            method: "delete",
+            data: {
+                // _method: "DELETE",
+                _token: csrf_token,
+            },
+            success: (response) => {
+                $(`#${id}`).remove();
+            },
+        });
+    });
+})(jQuery);
