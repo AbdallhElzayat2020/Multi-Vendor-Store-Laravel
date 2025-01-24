@@ -23,7 +23,6 @@
     </x-slot:breadcrumb>
     {{-- bradcrumb --}}
 
-
     <!-- Shopping Cart -->
     <div class="shopping-cart section">
         <div class="container">
@@ -52,17 +51,19 @@
                     </div>
                 </div>
                 <!-- End Cart List Title -->
-                <!-- Cart Single List list -->
-                @foreach ($items as $item)
+                @foreach ($cart->get() as $item)
+                    <!-- Cart Single List list -->
                     <div class="cart-single-list">
                         <div class="row align-items-center">
                             <div class="col-lg-1 col-md-1 col-12">
-                                <a href="{{ route('products.show', $item->product->slug) }}"><img
-                                        src="{{ $item->product->image_default }}" alt="{{ $item->product->name }}"></a>
+                                <a href="{{ route('products.show', $item->product->slug) }}">
+                                    <img src="{{ $item->product->image_default }}" alt="{{ $item->product->name }}">
+                                </a>
                             </div>
                             <div class="col-lg-4 col-md-3 col-12">
                                 <h5 class="product-name"><a href="{{ route('products.show', $item->product->slug) }}">
-                                        {{ $item->product->name }}</a></h5>
+                                        {{ $item->product->name }}
+                                    </a></h5>
                                 <p class="product-des">
                                     <span><em>Type:</em> Mirrorless</span>
                                     <span><em>Color:</em> Black</span>
@@ -70,11 +71,12 @@
                             </div>
                             <div class="col-lg-2 col-md-2 col-12">
                                 <div class="count-input">
-                                    <input class="form-control" type="number" value="{{ $item->quantity }}">
+                                    <input value="{{ $item->quantity }}" class="form-control item-quantity"
+                                        data-id="{{ $item->id }}" />
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-12">
-                                <p>{{ Currency::format($item->product->price) }}</p>
+                                <p>{{ Currency::format($item->quantity * $item->product->price) }}</p>
                             </div>
                             <div class="col-lg-2 col-md-2 col-12">
                                 <p>{{ Currency::format(0) }}</p>
@@ -84,9 +86,8 @@
                             </div>
                         </div>
                     </div>
+                    <!-- End Single List list -->
                 @endforeach
-
-                <!-- End Single List list -->
 
             </div>
             <div class="row">
@@ -109,15 +110,14 @@
                             <div class="col-lg-4 col-md-6 col-12">
                                 <div class="right">
                                     <ul>
-                                        <li>Cart Subtotal<span>{{ Currency::format($items->sum('total')) }}</span></li>
+                                        <li>Cart Subtotal<span>{{ $cart->total() }}</span></li>
                                         <li>Shipping<span>Free</span></li>
-                                        <li>You Save<span>0</span></li>
-
+                                        <li>You Save<span>{{ Currency::format(0) }}</span></li>
+                                        <li class="last">You Pay<span>{{ $cart->total() }}</span></li>
                                     </ul>
                                     <div class="button">
                                         <a href="checkout.html" class="btn">Checkout</a>
-                                        <a href="{{ route('products.index') }}" class="btn btn-alt">
-                                            Continue shopping</a>
+                                        <a href="product-grids.html" class="btn btn-alt">Continue shopping</a>
                                     </div>
                                 </div>
                             </div>
@@ -129,4 +129,13 @@
         </div>
     </div>
     <!--/ End Shopping Cart -->
+
+    @push('scripts')
+        <script>
+            const csrf_token = "{{ csrf_token() }}";
+        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="{{ asset('js/cart.js') }}"></script>
+    @endpush
+
 </x-front-layout>

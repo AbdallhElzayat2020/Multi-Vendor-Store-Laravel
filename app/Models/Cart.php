@@ -3,19 +3,17 @@
 namespace App\Models;
 
 use App\Observers\CartObserver;
+use Cookie;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class Cart extends Model
 {
-
     use HasFactory;
 
-    // turn off increment id
     public $incrementing = false;
-
-    // fillable
     protected $fillable = [
         'user_id',
         'cookie_id',
@@ -24,23 +22,40 @@ class Cart extends Model
         'options',
     ];
 
-    // observer for Cart
-    public static function booted()
+
+    //Get Cookie Id
+    public static function getCookieId()
     {
+        $cookie_id = Cookie::get('cart_cookie');
+        if (!$cookie_id) {
+            $cookie_id = Str::uuid();
+            Cookie::queue('cart_cookie', $cookie_id, 60 * 24 * 30);
+        }
+        return $cookie_id;
+    }
+
+    // Global scope for check cookie Id
+    protected static function booted()
+    {
+        // for cart
         static::observe(CartObserver::class);
+
+        // addGlobalScope for cart
+        static::addGlobalScope('cookie_id', function (Builder $builder) {
+            $builder->where('cookie_id', Cart::getCookieId());
+        });
     }
 
-    //relationship for user with Cart
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id')->withDefault([
-            'name' => 'Anonymous',
-        ]);
-    }
-
-    //relationship for product with Cart
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id')
+            ->withDefault([
+                'name' => 'anonymous',
+            ]);
     }
 }

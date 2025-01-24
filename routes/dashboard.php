@@ -6,11 +6,6 @@ use App\Http\Controllers\Dashboard\Products\ProductController;
 use App\Http\Controllers\Dashboard\Profile\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-
-
-
-
-
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
 Route::group([
@@ -22,8 +17,6 @@ Route::group([
     // soft delete routes
     Route::get('categories/trash', [CategoryController::class, 'trash'])
         ->name('categories.trash');
-
-
 
     Route::put('categories/{category}/restore', [CategoryController::class, 'restore'])
         ->name('categories.restore');
