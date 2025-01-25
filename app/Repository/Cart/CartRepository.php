@@ -28,10 +28,10 @@ class CartRepository implements CartRepositoryInterface
         }
         return $this->items;
     }
+
     public function add(Product $product, $quantity = 1)
     {
         $item = Cart::where('product_id', '=', $product->id)->first();
-
         if (!$item) {
             $cart = Cart::create([
                 'user_id' => Auth::user(),
