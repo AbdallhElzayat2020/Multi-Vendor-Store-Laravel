@@ -12,7 +12,6 @@ use Illuminate\Support\Str;
 class CartRepository implements CartRepositoryInterface
 {
 
-
     protected $items;
 
     public function __construct()
@@ -34,7 +33,7 @@ class CartRepository implements CartRepositoryInterface
         $item = Cart::where('product_id', '=', $product->id)->first();
         if (!$item) {
             $cart = Cart::create([
-                'user_id' => Auth::user(),
+                'user_id' => auth()->id(),
                 'product_id' => $product->id,
                 'quantity' => $quantity,
             ]);
@@ -43,7 +42,6 @@ class CartRepository implements CartRepositoryInterface
             $item->increment('quantity', $quantity);
         }
     }
-
 
     public function update($id, $quantity)
     {
@@ -65,6 +63,7 @@ class CartRepository implements CartRepositoryInterface
 
     public function total(): float
     {
+        // sql join but it is not efficient
         /*  return (float)Cart::join('products', 'products.id', '=', 'carts.product_id')
               ->selectRaw('sum(products.price * carts.quantity) as total')
               ->value('total');

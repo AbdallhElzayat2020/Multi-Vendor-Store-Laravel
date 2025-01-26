@@ -14,14 +14,13 @@ class CartMenu extends Component
      * Create a new component instance.
      */
 
-
     public $items;
     public $total;
 
     public function __construct(CartRepositoryInterface $cart)
     {
-       $this->items = $cart->get();
-       $this->total = $cart->total();
+        $this->items = $cart->get();
+        $this->total = $cart->total();
     }
 
     /**

@@ -11,5 +11,4 @@ class Cart extends Facade
        return CartRepositoryInterface::class;
     }
 
-
 }

@@ -14,14 +14,14 @@ class Cart extends Model
     use HasFactory;
 
     public $incrementing = false;
+
     protected $fillable = [
-        'user_id',
         'cookie_id',
+        'user_id',
         'product_id',
         'quantity',
         'options',
     ];
-
 
     //Get Cookie Id
     public static function getCookieId()
@@ -40,9 +40,16 @@ class Cart extends Model
         // for cart
         static::observe(CartObserver::class);
 
-        // addGlobalScope for cart
+        //manual observer
+        // static::creating(function (Cart $cart) {
+        //     $cart->id = Str::uuid();
+        // });
+
+        // addGlobalScope for CookieId for cart
         static::addGlobalScope('cookie_id', function (Builder $builder) {
-            $builder->where('cookie_id', Cart::getCookieId());
+            $builder->where('cookie_id', self::getCookieId());
+            // or
+            // $builder->where('cookie_id', Cart::getCookieId());
         });
     }
 

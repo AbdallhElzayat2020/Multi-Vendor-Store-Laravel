@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Interfaces\Cart\CartRepositoryInterface;
 use App\Models\Product;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -26,6 +27,9 @@ class CartController extends Controller
         return view('front.cart.index', [
             'cart' => $this->cart,
         ]);
+
+        // $items_cart = $this->cart->get();
+        // return response()->json($items_cart);
     }
 
 
@@ -45,6 +49,9 @@ class CartController extends Controller
 
         return redirect()->route('cart.index')
             ->with('success', 'Product added to cart');
+//        return response()->json([
+//            'message' => 'Product added to cart'
+//        ], 201);
     }
 
     /**
@@ -57,6 +64,7 @@ class CartController extends Controller
         ]);
 
         $this->cart->update($id, $request->post('quantity'));
+
     }
 
     /**
@@ -65,8 +73,12 @@ class CartController extends Controller
     public function destroy($id)
     {
         $this->cart->delete($id);
-        return [
-            'message' => 'Product removed from cart'
-        ];
+//        return [
+//            'message' => 'Product removed from cart'
+//        ];
+
+//        return response()->json([
+//            'message' => 'Product removed from cart'
+//        ]);
     }
 }

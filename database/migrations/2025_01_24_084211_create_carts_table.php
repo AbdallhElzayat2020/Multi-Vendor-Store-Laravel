@@ -13,15 +13,12 @@ return new class extends Migration {
         Schema::create('carts', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('cookie_id');
-            $table->foreignId('user_id')->nullable()->constrained('users')
-                ->cascadeOnDelete()->cascadeOnUpdate();
-
-            $table->foreignId('product_id')->constrained('products')
-                ->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->unsignedSmallInteger('quantity')->default(1);
             $table->json('options')->nullable();
-            $table->unique(['cookie_id', 'product_id']);
             $table->timestamps();
+            $table->primary(['cookie_id', 'product_id']);
         });
     }
 
