@@ -9,7 +9,6 @@ class OrderAddress extends Model
 {
     use HasFactory;
 
-
     public $timestamps = false;
     protected $fillable = [
         'order_id',
