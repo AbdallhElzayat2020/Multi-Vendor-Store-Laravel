@@ -15,6 +15,7 @@ class CartMenu extends Component
      */
 
     public $items;
+
     public $total;
 
     public function __construct(CartRepositoryInterface $cart)

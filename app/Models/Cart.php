@@ -37,6 +37,7 @@ class Cart extends Model
     // Global scope for check cookie Id
     protected static function booted()
     {
+
         // for cart
         static::observe(CartObserver::class);
 
