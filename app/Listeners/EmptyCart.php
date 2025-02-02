@@ -3,6 +3,8 @@
 namespace App\Listeners;
 
 use App\Facades\Cart;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
 
 class EmptyCart
 {
@@ -17,8 +19,9 @@ class EmptyCart
     /**
      * Handle the event.
      */
-    public function handle($order, $user): void
+    public function handle($event): void
     {
+
         Cart::empty();
     }
 }

@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('phone_number');
             $table->string('street_address');
             $table->string('city');
-            $table->char('country', 20);
+            $table->char('country', 80);
             $table->string('state')->nullable();
             $table->string('postal_code')->nullable();
         });

@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderAddress;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Intl\Countries;
 
@@ -53,14 +54,19 @@ class CheckoutController extends Controller
                     $address['type'] = $type;
                     $order->addresses()->create($address);
                 }
-                $cart->empty();
+
                 DB::commit();
-                return redirect()->route('home')->with('success', 'Order has been placed successfully');
+
+                //Create Order Event for empty cart and decrement product quantity
+                event('order.created', $order, Auth::user());
             }
+
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->withErrors($e->getMessage());
         }
+
+        return redirect()->route('home')->with('success', 'Order has been placed successfully');
 
     }
 }

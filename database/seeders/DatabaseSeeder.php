@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Store;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,18 +18,21 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
+////        should insert store first after that User
+
+//        \App\Models\Store::factory(10)->create();
+//
+//        \App\Models\Category::factory(10)->create();
+//
+//        \App\Models\Product::factory(100)->create();
+
         $this->call([
             UserSeeder::class,
-            //            Store::factory(10)->create(),
-            //            Category::factory(10)->create(),
-            //            Product::factory(100)->create(),
         ]);
 
-        //         Store::factory(20)->create();
-        //         Category::factory(20)->create();
-        //         Product::factory(200)->create();
 
-        \App\Models\User::factory(10)->create();
+
+//-----------------------------------------
 
         //         \App\Models\User::factory()->create([
         //             'name' => 'Test User',

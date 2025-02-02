@@ -15,21 +15,12 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-
-        // new method
-        // $user = new User();
-        // $user->name = "Admin";
-        // $user->email = "admin@gmail.com";
-        // $user->password = Hash::make('password'); //  password
-        // $user->phone_number = rand(123456789, 9999999999);
-        // $user->save();
-
         // create method
         User::create([
             'name' => 'user',
             'email' => 'user@gmail.com',
             'password' => Hash::make('password'), //  password
-            'phone_number' => '0123456788',
+            'phone_number' => '01234567899',
             'store_id' => Store::all()->random()->id,
         ]);
 
