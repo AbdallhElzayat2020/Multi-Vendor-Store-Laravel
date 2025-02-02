@@ -5,19 +5,15 @@ namespace App\Http\Controllers\Dashboard\Profile;
 use App\Http\Controllers\Controller;
 use App\Interfaces\Profile\ProfileRepositoryInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-
     protected $profile;
 
     public function __construct(ProfileRepositoryInterface $profile)
     {
         $this->profile = $profile;
     }
-
-
 
     public function edit()
     {

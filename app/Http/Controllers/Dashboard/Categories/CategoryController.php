@@ -10,9 +10,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-
     protected $category;
-
 
     public function __construct(CategoryRepositoryInterface $category)
     {
@@ -33,6 +31,7 @@ class CategoryController extends Controller
     {
         return $this->category->store($request);
     }
+
     public function show(Category $category)
     {
         return $this->category->show($category);
@@ -45,23 +44,24 @@ class CategoryController extends Controller
 
     public function update(CategoryRequest $request, $id)
     {
-        return  $this->category->update($request, $id);
+        return $this->category->update($request, $id);
     }
 
     public function trash()
     {
-        return  $this->category->trash();
+        return $this->category->trash();
     }
 
     public function destroy($id)
     {
-        return  $this->category->destroy($id);
+        return $this->category->destroy($id);
     }
 
     public function restore($id)
     {
         return $this->category->restore($id);
     }
+
     public function forceDelete($id)
     {
         return $this->category->forceDelete($id);

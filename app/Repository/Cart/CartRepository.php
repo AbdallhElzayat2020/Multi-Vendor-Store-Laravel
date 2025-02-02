@@ -5,33 +5,30 @@ namespace App\Repository\Cart;
 use App\Interfaces\Cart\CartRepositoryInterface;
 use App\Models\Cart;
 use App\Models\Product;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Str;
 
 class CartRepository implements CartRepositoryInterface
 {
-
     protected $items;
 
     public function __construct()
     {
-        //collect method is used to convert array to a collection
+        // collect method is used to convert array to a collection
         $this->items = collect([]);
     }
 
     public function get()
     {
-        if (!$this->items->count()) {
+        if (! $this->items->count()) {
             $this->items = Cart::with('product')->get();
         }
+
         return $this->items;
     }
 
     public function add(Product $product, $quantity = 1)
     {
         $item = Cart::where('product_id', '=', $product->id)->first();
-        if (!$item) {
+        if (! $item) {
             $cart = Cart::create([
                 'user_id' => auth()->id(),
                 'product_id' => $product->id,
@@ -47,7 +44,7 @@ class CartRepository implements CartRepositoryInterface
     {
         Cart::where('id', '=', $id)
             ->update([
-                'quantity' => $quantity
+                'quantity' => $quantity,
             ]);
     }
 

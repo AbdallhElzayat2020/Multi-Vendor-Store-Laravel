@@ -13,19 +13,17 @@ class Product extends Model
 {
     use HasFactory;
 
-
-
-    //Global scope for check store Id
+    // Global scope for check store Id
     protected static function booted()
     {
         static::addGlobalScope(StoreScope::class);
     }
 
-
     public function scopeActive(Builder $builder)
     {
         $builder->where('status', 'active');
     }
+
     protected $fillable = [
         'name',
         'slug',
@@ -41,18 +39,18 @@ class Product extends Model
         'category_id',
     ];
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
-    public function store()
+    public function store(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Store::class, 'store_id', 'id');
     }
 
     // relationship for tags
-    public function tags()
+    public function tags(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(
             Tag::class,
@@ -66,17 +64,18 @@ class Product extends Model
     {
         return 'https://www.theseasonedhome.com/content/images/thumbs/default-image_450.png';
 
-//         if (!$this->image) {
-//             return 'https://www.theseasonedhome.com/content/images/thumbs/default-image_450.png';
-//         }
-//         if (Str::startsWith($this->image, ['http://', 'https://'])) {
-//             return $this->image;
-//         }
-//         return asset('storage/' . $this->image);
+        //         if (!$this->image) {
+        //             return 'https://www.theseasonedhome.com/content/images/thumbs/default-image_450.png';
+        //         }
+        //         if (Str::startsWith($this->image, ['http://', 'https://'])) {
+        //             return $this->image;
+        //         }
+        //         return asset('storage/' . $this->image);
     }
-    public function getSalePercentAttribute()
+
+    public function getSalePercentAttribute(): float|int
     {
-        if (!$this->compare_price) {
+        if (! $this->compare_price) {
             return 0;
         }
 

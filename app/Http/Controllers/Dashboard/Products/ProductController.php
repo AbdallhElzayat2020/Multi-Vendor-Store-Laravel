@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Dashboard\Products;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\Products\ProductRepositoryInterface;
-use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-
     protected $product;
 
     public function __construct(ProductRepositoryInterface $product)

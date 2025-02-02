@@ -23,14 +23,15 @@ class Cart extends Model
         'options',
     ];
 
-    //Get Cookie Id
+    // Get Cookie Id
     public static function getCookieId()
     {
         $cookie_id = Cookie::get('cart_cookie');
-        if (!$cookie_id) {
+        if (! $cookie_id) {
             $cookie_id = Str::uuid();
             Cookie::queue('cart_cookie', $cookie_id, 60 * 24 * 30);
         }
+
         return $cookie_id;
     }
 
@@ -41,7 +42,7 @@ class Cart extends Model
         // for cart
         static::observe(CartObserver::class);
 
-        //manual observer
+        // manual observer
         // static::creating(function (Cart $cart) {
         //     $cart->id = Str::uuid();
         // });
@@ -54,12 +55,12 @@ class Cart extends Model
         });
     }
 
-    public function product()
+    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id')
             ->withDefault([

@@ -11,7 +11,6 @@ class Profile extends Model
 
     protected $primaryKey = 'user_id';
 
-
     protected $fillable = [
         'user_id',
         'first_name',
@@ -25,7 +24,6 @@ class Profile extends Model
         'country',
         'local',
     ];
-
 
     public function user()
     {

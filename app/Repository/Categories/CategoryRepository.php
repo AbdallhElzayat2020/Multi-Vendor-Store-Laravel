@@ -11,9 +11,6 @@ use Illuminate\Support\Str;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
-
-
-
     public function index($request)
     {
 
@@ -33,13 +30,9 @@ class CategoryRepository implements CategoryRepositoryInterface
         // $categories = $query->paginate(2);  // return Collection
         // $categories = DB::table('categories')->get();
 
-
-
-
         // query with scope  active
         // $categories = Category::active()->paginate(2);
         // $categories = Category::status('archived')->paginate(2);
-
 
         $query = Category::query();
         $categories = Category::with('parent')
@@ -50,12 +43,15 @@ class CategoryRepository implements CategoryRepositoryInterface
         // return $categories;
         return view('dashboard.Categories.index', compact('categories'));
     }
+
     public function create()
     {
         $parents = Category::all();
-        $category = new Category(); // for create category face;
+        $category = new Category; // for create category face;
+
         return view('dashboard.Categories.create', compact('parents', 'category'));
     }
+
     public function store($request)
     {
 
@@ -63,7 +59,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
         try {
             $request->merge([
-                'slug' => Str::slug($request->name)
+                'slug' => Str::slug($request->name),
             ]);
 
             $data = $request->except('image');
@@ -76,7 +72,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
                 $request->merge([
 
-                    $data['image'] = $path
+                    $data['image'] = $path,
                 ]);
             }
 
@@ -87,6 +83,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
             return redirect()->route('dashboard.categories.index')->with('error', $th->getMessage());
         }
+
         return redirect()->route('dashboard.categories.index')->with('success', 'Category created successfully');
     }
 
@@ -115,16 +112,16 @@ class CategoryRepository implements CategoryRepositoryInterface
             return redirect()->route('dashboard.categories.index')->with('error', $e->getMessage());
         }
     }
+
     public function update($request, $id)
     {
         try {
             $category = Category::findOrFail($id);
 
-
             $old_image = $category->image;
             // check if the request has image
             $request->merge([
-                'slug' => Str::slug($request->name)
+                'slug' => Str::slug($request->name),
             ]);
 
             $data = $request->except('image');
@@ -137,12 +134,11 @@ class CategoryRepository implements CategoryRepositoryInterface
 
                 $request->merge([
 
-                    $data['image'] = $path
+                    $data['image'] = $path,
                 ]);
             }
 
             $category->update($data);
-
 
             if ($old_image && $request->hasFile('image')) {
 
@@ -157,16 +153,12 @@ class CategoryRepository implements CategoryRepositoryInterface
         }
     }
 
-
     public function destroy($id)
     {
 
         try {
             $category = Category::findOrFail($id);
             $category->delete();
-
-
-
 
             // if ($category->image) {
             //     Storage::disk('public')->delete($category->image);
@@ -181,6 +173,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function trash()
     {
         $categories = Category::onlyTrashed()->paginate(2);
+
         return view('dashboard.Categories.trash', compact('categories'));
     }
 
@@ -188,6 +181,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         $category = Category::onlyTrashed()->findOrFail($id);
         $category->restore();
+
         return redirect()->route('dashboard.categories.trash')
             ->with('success', 'Category restored successfully');
 
@@ -204,6 +198,7 @@ class CategoryRepository implements CategoryRepositoryInterface
         if ($category->image) {
             Storage::disk('public')->delete($category->image);
         }
+
         return redirect()->route('dashboard.categories.trash')
             ->with('success', 'Category deleted successfully');
     }

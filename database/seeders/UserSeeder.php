@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Store;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -27,8 +26,8 @@ class UserSeeder extends Seeder
 
         // create method
         User::create([
-            'name' => "user",
-            'email' => "user@gmail.com",
+            'name' => 'user',
+            'email' => 'user@gmail.com',
             'password' => Hash::make('password'), //  password
             'phone_number' => '0123456788',
             'store_id' => Store::all()->random()->id,
@@ -36,8 +35,8 @@ class UserSeeder extends Seeder
 
         // query builder
         DB::table('users')->insert([
-            'name' => "Admin",
-            'email' => "admin@gmail.com",
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('password'), //  password
             'phone_number' => '0123456789',
             'store_id' => Store::all()->random()->id,

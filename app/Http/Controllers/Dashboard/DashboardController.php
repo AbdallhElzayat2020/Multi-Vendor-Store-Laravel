@@ -4,13 +4,11 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 
 class DashboardController extends Controller
 {
-
     // check auth if user is not authed then redirect to login
     public function __construct()
     {
@@ -26,7 +24,7 @@ class DashboardController extends Controller
 
         return view('dashboard.index', compact('user'));
 
-        //or
+        // or
         // return response()->view('dashboard', [
         //     'user' => $user,
         // ]);

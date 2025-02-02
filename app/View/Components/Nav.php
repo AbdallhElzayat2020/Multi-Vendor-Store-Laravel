@@ -9,14 +9,14 @@ use Illuminate\View\Component;
 
 class Nav extends Component
 {
-
     public $items;
+
     public $active;
+
     /**
      * Create a new component instance.
      */
     public function __construct()
-
     {
         $this->items = config('Nav');
 

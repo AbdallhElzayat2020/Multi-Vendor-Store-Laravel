@@ -10,11 +10,10 @@ use Symfony\Component\Intl\Languages;
 
 class ProfileRepository implements ProfileRepositoryInterface
 {
-
-
     public function edit()
     {
         $user = Auth::user();
+
         return view('dashboard.Profile.edit', [
             'user' => $user,
             'countries' => array_map('strval', Countries::getNames()),

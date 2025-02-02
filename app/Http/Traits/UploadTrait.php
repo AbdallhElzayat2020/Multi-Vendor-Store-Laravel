@@ -3,7 +3,6 @@
 namespace App\Http\Traits;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 trait UploadTrait
 {
@@ -23,13 +22,11 @@ trait UploadTrait
 
         // ]);
 
-
-
         if ($request->hasFile($inputname)) {
 
             $file = $request->file($inputname);
 
-            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $filename = time().'.'.$file->getClientOriginalExtension();
 
             $path = $file->storeAs($foldername, $filename, $disk);
         }

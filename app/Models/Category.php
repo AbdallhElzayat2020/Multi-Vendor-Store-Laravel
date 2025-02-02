@@ -11,7 +11,6 @@ class Category extends Model
 {
     use HasFactory, SoftDeletes;
 
-
     // scope
     public function scopeActive(Builder $builder)
     {
@@ -49,7 +48,6 @@ class Category extends Model
         'parent_id',
     ];
 
-
     // relationship Products on category
     public function products()
     {
@@ -61,7 +59,7 @@ class Category extends Model
     {
         return $this->belongsTo(Category::class, 'parent_id', 'id')
             ->withDefault([
-                'name' => 'No Parent'
+                'name' => 'No Parent',
             ]);
     }
 

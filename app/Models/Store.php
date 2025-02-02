@@ -25,7 +25,6 @@ class Store extends Model
     // if I want to change the timestamps
     // protected $timestamps = true , false;
 
-
     protected $table = 'stores';
 
     protected $fillable = [

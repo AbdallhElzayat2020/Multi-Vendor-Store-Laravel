@@ -1,12 +1,10 @@
 <?php
 
-
 namespace App\Repository\Products;
 
 use App\Interfaces\Products\ProductRepositoryInterface;
 use App\Models\Product;
 use App\Models\Tag;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ProductRepository implements ProductRepositoryInterface
@@ -17,6 +15,7 @@ class ProductRepository implements ProductRepositoryInterface
 
         return view('dashboard.Products.index', compact('products'));
     }
+
     public function create()
     {
         //
@@ -51,17 +50,16 @@ class ProductRepository implements ProductRepositoryInterface
             $slug = Str::slug($t_name);
             $tag = Tag::where('slug', $slug)->first();
 
-            if (!$tag) {
+            if (! $tag) {
                 $tag = Tag::create([
                     'name' => $t_name,
                     'slug' => $slug,
                 ]);
-            };
+            }
             $tag_ids[] = $tag->id;
         }
 
         $product->tags()->sync($tag_ids);
-
 
         return redirect()->route('dashboard.products.index')
             ->with('success', 'Product Updated Successfully');

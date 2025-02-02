@@ -13,7 +13,6 @@ class CartController extends Controller
     /**
      * Display a listing of the resource.
      */
-
     protected $cart;
 
     public function __construct(CartRepositoryInterface $cart)
@@ -32,7 +31,6 @@ class CartController extends Controller
         // return response()->json($items_cart);
     }
 
-
     /**
      * Store a newly created resource in storage.
      */
@@ -49,9 +47,9 @@ class CartController extends Controller
 
         return redirect()->route('cart.index')
             ->with('success', 'Product added to cart');
-//        return response()->json([
-//            'message' => 'Product added to cart'
-//        ], 201);
+        //        return response()->json([
+        //            'message' => 'Product added to cart'
+        //        ], 201);
     }
 
     /**
@@ -73,12 +71,12 @@ class CartController extends Controller
     public function destroy($id)
     {
         $this->cart->delete($id);
-//        return [
-//            'message' => 'Product removed from cart'
-//        ];
+        //        return [
+        //            'message' => 'Product removed from cart'
+        //        ];
 
-//        return response()->json([
-//            'message' => 'Product removed from cart'
-//        ]);
+        //        return response()->json([
+        //            'message' => 'Product removed from cart'
+        //        ]);
     }
 }

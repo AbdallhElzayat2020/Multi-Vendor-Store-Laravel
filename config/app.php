@@ -1,6 +1,5 @@
 <?php
 
-use App\Providers\RepositoryProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -72,7 +71,6 @@ return [
     */
 
     'timezone' => 'Africa/Cairo',
-
 
     'currency' => 'EUR',
 
