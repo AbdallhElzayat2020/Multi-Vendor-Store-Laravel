@@ -31,8 +31,8 @@ class DeductProductQuantity
     {
         $order = $event->order;
 
-//        dd($order->products);
         foreach ($order->products as $product) {
+            //order item is a name from the pivot table in Order model
             $product->decrement('quantity', $product->order_item->quantity); // Decrement the quantity of the product
 
 //            Product::where('id', '=', $item->product_id)
