@@ -20,16 +20,6 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
-//            DeductProductQuantity::class,
-//            EmptyCart::class,
-        ],
-//        'order.created' => [
-//            DeductProductQuantity::class,
-//            EmptyCart::class,
-//        ],
-        OrderCreate::class => [
-            DeductProductQuantity::class,
-            EmptyCart::class,
         ],
     ];
 

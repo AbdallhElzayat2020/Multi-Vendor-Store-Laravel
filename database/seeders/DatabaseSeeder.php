@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-////        should insert store first after that User
+//        should insert store first after that User
 
 //        \App\Models\Store::factory(10)->create();
 //

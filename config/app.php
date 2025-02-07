@@ -172,7 +172,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        // Repository Provider for Design Pattern
+        // Repository Provider for Design Pattern Repositories
         App\Providers\RepositoryProvider::class,
     ])->toArray(),
 

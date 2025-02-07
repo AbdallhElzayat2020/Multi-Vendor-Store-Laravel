@@ -5,69 +5,67 @@ namespace App\Repository\Cart;
 use App\Interfaces\Cart\CartRepositoryInterface;
 use App\Models\Cart;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Str;
+
 
 class CartRepository implements CartRepositoryInterface
 {
-    protected $items;
 
-    public function __construct()
+
+    protected function getCookieId()
     {
-        // collect method is used to convert array to a collection
-        $this->items = collect([]);
+        $cookieId = Cookie::get('cart_id');
+        if (!$cookieId) {
+            $cookieId = Str::uuid();
+            Cookie::queue('cart_id', $cookieId, 60 * 24 * 30);
+        }
+        return $cookieId;
     }
 
     public function get()
     {
-        if (! $this->items->count()) {
-            $this->items = Cart::with('product')->get();
-        }
-
-        return $this->items;
+        return Cart::where('cookie_id', '=', $this->getCookieId())
+            ->get();
     }
 
     public function add(Product $product, $quantity = 1)
     {
-        $item = Cart::where('product_id', '=', $product->id)->first();
-        if (! $item) {
-            $cart = Cart::create([
-                'user_id' => auth()->id(),
-                'product_id' => $product->id,
-                'quantity' => $quantity,
-            ]);
-            $this->get()->push($cart);
-        } else {
-            $item->increment('quantity', $quantity);
-        }
+        return Cart::create([
+            'user_id' => Auth::id(),
+            'cookie_id' => $this->getCookieId(),
+            'product_id' => $product->id,
+            'quantity' => $quantity,
+        ]);
     }
 
-    public function update($id, $quantity)
+    public function update(Product $product, $quantity)
     {
-        Cart::where('id', '=', $id)
+        Cart::where('cookie_id', '=', $this->getCookieId())
+            ->where('product_id', '=', $product->id)
             ->update([
-                'quantity' => $quantity,
+                'quantity' => $quantity
             ]);
     }
 
     public function delete($id)
     {
-        Cart::where('id', '=', $id)->delete();
+        Cart::where('cookie_id', '=', $this->getCookieId())
+            ->where('user_id', '=', Auth::id())
+            ->where('id', '=', $id)
+            ->delete();
     }
 
     public function empty()
     {
-        Cart::query()->delete();
+        Cart::where('cookie_id', '=', $this->getCookieId())
+            ->delete();
     }
 
-    public function total(): float
+    public function total()
     {
-        // sql join but it is not efficient
-        /*  return (float)Cart::join('products', 'products.id', '=', 'carts.product_id')
-              ->selectRaw('sum(products.price * carts.quantity) as total')
-              ->value('total');
-        */
-
-        return $this->get()->sum(function ($item) {
-            return $item->quantity * $item->product->price;
-        });
+        // TODO: Implement total() method.
     }
+
 }
