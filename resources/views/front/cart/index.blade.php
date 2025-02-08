@@ -21,7 +21,7 @@
             </div>
         </div>
     </x-slot:breadcrumb>
-    {{-- bradcrumb --}}
+    {{-- breadcrumb --}}
 
     <!-- Shopping Cart -->
     <div class="shopping-cart section">
@@ -72,7 +72,7 @@
                             <div class="col-lg-2 col-md-2 col-12">
                                 <div class="count-input">
                                     <input value="{{ $item->quantity }}" class="form-control item-quantity"
-                                        data-id="{{ $item->id }}" />
+                                           data-id="{{ $item->id }}"/>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-12">
@@ -82,8 +82,9 @@
                                 <p>{{ Currency::format(0) }}</p>
                             </div>
                             <div class="col-lg-1 col-md-2 col-12">
-                                <a class="remove-item" data-id="{{ $item->id }}" href="javascript:void(0)"><i
-                                        class="lni lni-close"></i></a>
+                                <a class="remove-item" data-id="{{ $item->id }}" href="javascript:void(0)">
+                                    <i class="lni lni-close"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -117,7 +118,7 @@
                                         <li class="last">You Pay<span>{{ $cart->total() }}</span></li>
                                     </ul>
                                     <div class="button">
-                                        <a href="{{ route('checkout') }}" class="btn">Checkout</a>
+                                        <a href="#" class="btn">Checkout</a>
                                         <a href="{{ route('products.index') }}" class="btn btn-alt">Continue
                                             shopping</a>
                                     </div>

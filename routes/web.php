@@ -38,9 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('checkout', [CheckoutController::class, 'create'])->name('checkout');
-
-Route::post('checkout', [CheckoutController::class, 'store']);
+//Route::get('checkout', [CheckoutController::class, 'create'])->name('checkout');
+//
+//Route::post('checkout', [CheckoutController::class, 'store']);
 
 require __DIR__.'/auth.php';
 

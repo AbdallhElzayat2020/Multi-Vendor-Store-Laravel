@@ -14,9 +14,11 @@ use Illuminate\Support\ServiceProvider;
 
 class RepositoryProvider extends ServiceProvider
 {
+
     /**
      * Register services.
      */
+
     public function register(): void
     {
         $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
