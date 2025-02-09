@@ -38,8 +38,8 @@
                 <span class="total-amount">{{ Currency::format($total) }}</span>
             </div>
             <div class="button">
-{{--                <a href="{{ route('checkout') }}" class="btn animate">Checkout</a>--}}
-                <a href="{{route('cart.index')}}" class="btn animate">Go to Cart</a>
+                {{--                <a href="{{ route('checkout') }}" class="btn animate">Checkout</a>--}}
+                <a href="{{route('cart.index')}}" class="btn animate">View Cart</a>
             </div>
         </div>
     </div>

@@ -51,16 +51,14 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer|min:1',
+            'quantity' => 'required|int|min:1',
         ]);
 
-        $product = Product::findOrFail($request->post('product_id'));
         $quantity = $request->post('quantity');
-        $this->cart->update($product, $quantity);
+        $this->cart->update($id, $quantity);
     }
 
     /**
@@ -69,5 +67,8 @@ class CartController extends Controller
     public function destroy($id)
     {
         $this->cart->delete($id);
+        return [
+            'message' => 'Product removed from cart',
+        ];
     }
 }
