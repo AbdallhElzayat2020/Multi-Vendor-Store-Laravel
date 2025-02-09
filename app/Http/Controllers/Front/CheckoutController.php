@@ -27,6 +27,9 @@ class CheckoutController extends Controller
         ]);
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function store(Request $request, CartRepositoryInterface $cart)
     {
         $request->validate([
@@ -54,19 +57,22 @@ class CheckoutController extends Controller
                         'price' => $item->product->price,
                         'quantity' => $item->quantity,
                     ]);
-                };
+                }
 
                 foreach ($request->post('addr') as $type => $address) {
                     $address['type'] = $type;
                     $order->addresses()->create($address);
                 }
+
             }
+
             $cart->empty();
 
             DB::commit();
 
+            event('order.created');
 
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             DB::rollBack();
             throw $e;
         }

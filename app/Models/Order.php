@@ -12,14 +12,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'store_id',
-        'number',
-        'status',
-        'payment_status',
-        'payment_method',
-    ];
+
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
@@ -40,6 +33,7 @@ class Order extends Model
             ->withPivot(['quantity', 'price', 'options', 'product_name'])
             ->as('order_item');
     }
+
 
     public function addresses(): HasMany
     {
@@ -74,5 +68,4 @@ class Order extends Model
 
         return $year . '0001';
     }
-
 }
