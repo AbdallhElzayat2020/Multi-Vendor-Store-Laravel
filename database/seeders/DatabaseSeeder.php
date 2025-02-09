@@ -18,13 +18,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-//        should insert store first after that User
+        //        should insert store first after that User
 
-//        \App\Models\Store::factory(10)->create();
+//         \App\Models\Store::factory(10)->create();
 //
-//        \App\Models\Category::factory(10)->create();
+//         \App\Models\Category::factory(10)->create();
 //
-//        \App\Models\Product::factory(100)->create();
+//         \App\Models\Product::factory(100)->create();
 
         $this->call([
             UserSeeder::class,
@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
 
 
 
-//-----------------------------------------
+        //-----------------------------------------
 
         //         \App\Models\User::factory()->create([
         //             'name' => 'Test User',

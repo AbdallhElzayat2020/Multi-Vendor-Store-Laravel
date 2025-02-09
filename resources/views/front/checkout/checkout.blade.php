@@ -26,10 +26,10 @@
 
     <section class="checkout-wrapper section">
         <div class="container">
-            @if($errors->any())
+            @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
-                        @foreach($errors->all() as $error)
+                        @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
                     </ul>
@@ -45,7 +45,7 @@
                                     <h6 class="title" data-bs-toggle="collapse" data-bs-target="#collapseThree"
                                         aria-expanded="true" aria-controls="collapseThree">Your Personal Details </h6>
                                     <section class="checkout-steps-form-content collapse show" id="collapseThree"
-                                             aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                        aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="single-form form-default">
@@ -53,11 +53,11 @@
                                                     <div class="row">
                                                         <div class="col-md-6 form-input form">
                                                             <input type="text" name="addr[billing][first_name]"
-                                                                   placeholder="First Name">
+                                                                placeholder="First Name">
                                                         </div>
                                                         <div class="col-md-6 form-input form">
                                                             <input type="text" name="addr[billing][last_name]"
-                                                                   placeholder="Last Name">
+                                                                placeholder="Last Name">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -67,7 +67,7 @@
                                                     <label>Email Address</label>
                                                     <div class="form-input form">
                                                         <input type="text" name="addr[billing][email]"
-                                                               placeholder="Email Address">
+                                                            placeholder="Email Address">
                                                     </div>
                                                 </div>
                                             </div>
@@ -76,7 +76,7 @@
                                                     <label>Phone Number</label>
                                                     <div class="form-input form">
                                                         <input type="text" name="addr[billing][phone_number]"
-                                                               placeholder="Phone Number">
+                                                            placeholder="Phone Number">
                                                     </div>
                                                 </div>
                                             </div>
@@ -85,7 +85,7 @@
                                                     <label>Mailing Address</label>
                                                     <div class="form-input form">
                                                         <input type="text" name="addr[billing][street_address]"
-                                                               placeholder="Street Address">
+                                                            placeholder="Street Address">
                                                     </div>
                                                 </div>
                                             </div>
@@ -94,7 +94,7 @@
                                                     <label>City</label>
                                                     <div class="form-input form">
                                                         <input type="text" name="addr[billing][city]"
-                                                               placeholder="City">
+                                                            placeholder="City">
                                                     </div>
                                                 </div>
                                             </div>
@@ -103,7 +103,7 @@
                                                     <label>Post Code</label>
                                                     <div class="form-input form">
                                                         <input type="text" name="addr[billing][post_code]"
-                                                               placeholder="Post Code">
+                                                            placeholder="Post Code">
                                                     </div>
                                                 </div>
                                             </div>
@@ -121,7 +121,7 @@
                                                     <label>State</label>
                                                     <div class="form-input form">
                                                         <input type="text" name="addr[billing][state]"
-                                                               placeholder="State">
+                                                            placeholder="State">
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,7 +130,7 @@
                                                     <label>Country</label>
                                                     <div class="form-input form">
                                                         <select name="addr[billing][country]" id="country"
-                                                                class="form-control form-select @error('country') is-invalid @enderror">
+                                                            class="form-control form-select @error('country') is-invalid @enderror">
                                                             <option value="">Select Country</option>
                                                             @foreach ($countries as $country)
                                                                 <option value="{{ $country }}">
@@ -139,7 +139,7 @@
                                                             @endforeach
                                                         </select>
                                                         @error('country')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                            <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
                                                     </div>
 
@@ -153,8 +153,8 @@
                                                     <div class="col-md-12">
                                                         <div class="single-form button">
                                                             <button class="btn" data-bs-toggle="collapse"
-                                                                    data-bs-target="#collapseFour" aria-expanded="false"
-                                                                    aria-controls="collapseFour">next
+                                                                data-bs-target="#collapseFour" aria-expanded="false"
+                                                                aria-controls="collapseFour">next
                                                                 step
                                                             </button>
                                                         </div>
@@ -169,7 +169,7 @@
                                         data-bs-target="#collapseFour" aria-expanded="false"
                                         aria-controls="collapseFour">Shipping Address</h6>
                                     <section class="checkout-steps-form-content collapse" id="collapseFour"
-                                             aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                        aria-labelledby="headingFour" data-bs-parent="#accordionExample">
 
                                         <div class="row">
                                             <div class="col-md-12">
@@ -178,11 +178,11 @@
                                                     <div class="row">
                                                         <div class="col-md-6 form-input form">
                                                             <input type="text" name="addr[shipping][first_name]"
-                                                                   placeholder="First Name">
+                                                                placeholder="First Name">
                                                         </div>
                                                         <div class="col-md-6 form-input form">
                                                             <input type="text" name="addr[shipping][last_name]"
-                                                                   placeholder="Last Name">
+                                                                placeholder="Last Name">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -192,7 +192,7 @@
                                                     <label>Email Address</label>
                                                     <div class="form-input form">
                                                         <input type="text" name="addr[shipping][email]"
-                                                               placeholder="Email Address">
+                                                            placeholder="Email Address">
                                                     </div>
                                                 </div>
                                             </div>
@@ -201,7 +201,7 @@
                                                     <label>Phone Number</label>
                                                     <div class="form-input form">
                                                         <input type="text" name="addr[shipping][phone_number]"
-                                                               placeholder="Phone Number">
+                                                            placeholder="Phone Number">
                                                     </div>
                                                 </div>
                                             </div>
@@ -210,7 +210,7 @@
                                                     <label>Mailing Address</label>
                                                     <div class="form-input form">
                                                         <input type="text" name="addr[shipping][street_address]"
-                                                               placeholder="Street Address">
+                                                            placeholder="Street Address">
                                                     </div>
                                                 </div>
                                             </div>
@@ -219,7 +219,7 @@
                                                     <label>City</label>
                                                     <div class="form-input form">
                                                         <input type="text" name="addr[shipping][city]"
-                                                               placeholder="City">
+                                                            placeholder="City">
                                                     </div>
                                                 </div>
                                             </div>
@@ -228,7 +228,7 @@
                                                     <label>Post Code</label>
                                                     <div class="form-input form">
                                                         <input type="text" name="addr[shipping][post_code]"
-                                                               placeholder="Post Code">
+                                                            placeholder="Post Code">
                                                     </div>
                                                 </div>
                                             </div>
@@ -246,14 +246,14 @@
                                                     <label>State</label>
                                                     <div class="form-input form">
                                                         <input type="text" name="addr[shipping][state]"
-                                                               placeholder="State">
+                                                            placeholder="State">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                                                 <label for="country" class="form-label">Country</label>
                                                 <select name="addr[shipping][country]" id="country"
-                                                        class="form-control form-select @error('country') is-invalid @enderror">
+                                                    class="form-control form-select @error('country') is-invalid @enderror">
                                                     <option value="">Select Country</option>
                                                     @foreach ($countries as $country)
                                                         <option value="{{ $country }}">
@@ -262,7 +262,7 @@
                                                     @endforeach
                                                 </select>
                                                 @error('country')
-                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                    <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
 
@@ -276,8 +276,8 @@
                                             <div class="col-md-12">
                                                 <div class="single-form button">
                                                     <button class="btn" data-bs-toggle="collapse"
-                                                            data-bs-target="#collapseFour" aria-expanded="false"
-                                                            aria-controls="collapseFour">next
+                                                        data-bs-target="#collapseFour" aria-expanded="false"
+                                                        aria-controls="collapseFour">next
                                                         step
                                                     </button>
                                                 </div>
@@ -290,7 +290,7 @@
                                         data-bs-target="#collapsefive" aria-expanded="false"
                                         aria-controls="collapsefive">Payment Info</h6>
                                     <section class="checkout-steps-form-content collapse" id="collapsefive"
-                                             aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                                        aria-labelledby="headingFive" data-bs-parent="#accordionExample">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="checkout-payment-form">
@@ -304,9 +304,8 @@
                                                         <label>Card Number</label>
                                                         <div class="form-input form">
                                                             <input id="credit-input" type="text"
-                                                                   placeholder="0000 0000 0000 0000">
-                                                            <img
-                                                                src="{{ asset('assets/frontend/images/footer/credit-cards-footer.png') }}"
+                                                                placeholder="0000 0000 0000 0000">
+                                                            <img src="{{ asset('assets/frontend/images/footer/credit-cards-footer.png') }}"
                                                                 alt="card">
                                                         </div>
                                                     </div>

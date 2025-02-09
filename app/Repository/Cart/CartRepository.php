@@ -32,12 +32,13 @@ class CartRepository implements CartRepositoryInterface
         $item = Cart::where('product_id', '=', $product->id)->first();
 
         if (!$item) {
-            return $cart = Cart::create([
+            $cart = Cart::create([
                 'user_id' => Auth::id(),
                 'quantity' => $quantity,
                 'product_id' => $product->id,
             ]);
             $this->get()->push($cart);
+            return $cart;
         }
 
         $item->increment('quantity', $quantity);

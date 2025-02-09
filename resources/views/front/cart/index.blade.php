@@ -118,7 +118,7 @@
                                         <li class="last">You Pay<span>{{ $cart->total() }}</span></li>
                                     </ul>
                                     <div class="button">
-                                        <a href="#" class="btn">Checkout</a>
+                                        <a href="{{route('checkout')}}" class="btn">Checkout</a>
                                         <a href="{{ route('products.index') }}" class="btn btn-alt">Continue
                                             shopping</a>
                                     </div>
