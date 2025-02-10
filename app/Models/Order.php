@@ -12,8 +12,6 @@ class Order extends Model
 {
     use HasFactory;
 
-
-
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id')->withDefault([
@@ -33,7 +31,6 @@ class Order extends Model
             ->withPivot(['quantity', 'price', 'options', 'product_name'])
             ->as('order_item');
     }
-
 
     public function addresses(): HasMany
     {
