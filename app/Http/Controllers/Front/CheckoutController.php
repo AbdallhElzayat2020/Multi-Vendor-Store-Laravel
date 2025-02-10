@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Events\OrderCreated;
 use App\Facades\Cart;
 use App\Http\Controllers\Controller;
 use App\Interfaces\Cart\CartRepositoryInterface;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Intl\Countries;
 
@@ -64,13 +66,13 @@ class CheckoutController extends Controller
                     $order->addresses()->create($address);
                 }
 
+                DB::commit();
+
+//                event('order.created', $order, Auth::user());
+
+                event(new OrderCreated($order));
             }
 
-            $cart->empty();
-
-            DB::commit();
-
-            event('order.created');
 
         } catch (\Throwable $e) {
             DB::rollBack();

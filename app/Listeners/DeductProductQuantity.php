@@ -2,10 +2,12 @@
 
 namespace App\Listeners;
 
+use App\Events\OrderCreated;
 use App\Facades\Cart;
 use App\Models\Product;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\DB;
 
 class DeductProductQuantity
 {
@@ -20,20 +22,20 @@ class DeductProductQuantity
     /**
      * Handle the event.
      */
-    public function handle(): void
+    public function handle($event)
     {
 //        $products = Cart::get();
 //        foreach ($products as $product) {
 //
 //        }
+//        dd($order->products);
 
-        foreach (Cart::get() as $item) {
-//            $item->product->decrement('quantity', $item->quantity);
+        $order = $event->order;
 
-            Product::where('id','=',$item->product_id)
-                ->update([
+        foreach ($order->products as $product) {
 
-                ]);
+            $product->decrement('quantity', $product->order_item->quantity);
+
         }
     }
 }
