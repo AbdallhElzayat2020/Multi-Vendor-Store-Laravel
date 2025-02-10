@@ -12,7 +12,6 @@ class Order extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'user_id',
         'store_id',
@@ -21,6 +20,7 @@ class Order extends Model
         'payment_status',
         'payment_method',
     ];
+    
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id')->withDefault([
@@ -40,7 +40,6 @@ class Order extends Model
             ->as('order_item')
             ->withPivot(['quantity', 'price', 'options', 'product_name']);
     }
-
 
     public function addresses(): HasMany
     {

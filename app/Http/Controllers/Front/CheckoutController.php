@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Events\OrderCreated;
+use App\Events\Test;
 use App\Facades\Cart;
 use App\Http\Controllers\Controller;
 use App\Interfaces\Cart\CartRepositoryInterface;
@@ -29,9 +30,6 @@ class CheckoutController extends Controller
         ]);
     }
 
-    /**
-     * @throws \Throwable
-     */
     public function store(Request $request, CartRepositoryInterface $cart)
     {
         $request->validate([
@@ -68,15 +66,16 @@ class CheckoutController extends Controller
 
                 DB::commit();
 
-//                event('order.created', $order, Auth::user());
+                //event('order.created', $order, Auth::user());
 
+                //event for DeductProductQuantity && Empty Cart
                 event(new OrderCreated($order));
+                
             }
-
 
         } catch (\Throwable $e) {
             DB::rollBack();
-            throw $e;
+            dd($e);
         }
         return redirect()->route('home');
     }

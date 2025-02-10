@@ -24,11 +24,11 @@ class DeductProductQuantity
      */
     public function handle($event)
     {
-//        $products = Cart::get();
-//        foreach ($products as $product) {
-//
+//        foreach (Cart::get() as $product) {
+//            Product::where('id', $product->id)->update([
+//                'quantity' => DB::raw("quantity - {$product->quantity}"),
+//            ]);
 //        }
-//        dd($order->products);
 
         $order = $event->order;
 

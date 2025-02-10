@@ -19,6 +19,7 @@ class EmptyCart
     /**
      * Handle the event.
      */
+
     public function handle($event)
     {
         Cart::empty();
