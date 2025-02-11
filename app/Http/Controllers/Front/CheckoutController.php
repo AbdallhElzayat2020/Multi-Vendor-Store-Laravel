@@ -33,9 +33,12 @@ class CheckoutController extends Controller
     public function store(Request $request, CartRepositoryInterface $cart)
     {
         $request->validate([
-            //
+            'addr.billing.first_name' => ['required', 'string', 'max:255'],
+            'addr.billing.last_name' => ['required', 'string', 'max:255'],
+            'addr.billing.email' => ['nullable', 'email', 'max:255'],
+            'addr.billing.phone_number' => ['required', 'max:255'],
         ]);
-
+//0597894561
         $items = $cart->get()->groupBy('product.store_id')->all();
 
         DB::beginTransaction();
@@ -70,13 +73,12 @@ class CheckoutController extends Controller
 
                 //event for DeductProductQuantity && Empty Cart
                 event(new OrderCreated($order));
-                
             }
 
         } catch (\Throwable $e) {
             DB::rollBack();
             dd($e);
         }
-        return redirect()->route('home');
+//        return redirect()->route('home');
     }
 }

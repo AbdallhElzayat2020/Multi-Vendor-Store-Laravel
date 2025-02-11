@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Store extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     // IF I want to change the created_at and updated_at
     // const CREATED_AT = 'created_on';
@@ -36,7 +37,7 @@ class Store extends Model
         'status',
     ];
 
-    public function products()
+    public function products(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Product::class, 'store_id', 'id');
     }
