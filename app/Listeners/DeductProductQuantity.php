@@ -21,6 +21,7 @@ class DeductProductQuantity
 
     /**
      * Handle the event.
+     * @throws \Throwable
      */
     public function handle($event)
     {
@@ -32,10 +33,12 @@ class DeductProductQuantity
 
         $order = $event->order;
 
-        foreach ($order->products as $product) {
-
-            $product->decrement('quantity', $product->order_item->quantity);
-
+        try {
+            foreach ($order->products as $product) {
+                $product->decrement('quantity', $product->order_item->quantity);
+            }
+        } catch (\Throwable $e) {
+            throw  $e;
         }
     }
 }

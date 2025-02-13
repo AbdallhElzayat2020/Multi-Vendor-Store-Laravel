@@ -29,7 +29,7 @@ class OrderCreatedNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -45,7 +45,18 @@ class OrderCreatedNotification extends Notification
             ->line("A New Order #{$this->order->number} Created By {$addr->name} From {$addr->country}") // country name is not exists in database it's from association
             ->action('View Order', url('/dashboard'))
             ->line('Thank you for using our application!');
+
         //->view('mail.order-created');
+    }
+
+    public function toDatabase($notifiable)
+    {
+        $addr = $this->order->billingAddress;
+        return [
+            'body' => "new Order Created #{$this->order->number} by {$addr->name} from {$addr->country}",
+            'icon' => 'bi bi-info-circle text-primary',
+            'url' => url('dashboard'),
+        ];
     }
 
     /**

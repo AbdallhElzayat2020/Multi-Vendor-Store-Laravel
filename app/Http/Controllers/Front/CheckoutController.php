@@ -51,7 +51,6 @@ class CheckoutController extends Controller
                     'store_id' => $store_id,
                     'payment_method' => 'Cash On Delivery'
                 ]);
-
                 foreach ($cart_items as $item) {
                     OrderItem::create([
                         'order_id' => $order->id,
