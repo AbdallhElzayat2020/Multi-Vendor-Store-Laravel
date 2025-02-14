@@ -17,6 +17,7 @@ class MarkNotificationASRead
     {
 
         $notification_id = $request->query('notification_id');
+
         if ($notification_id) {
             $user = auth()->user();
             if ($user) {

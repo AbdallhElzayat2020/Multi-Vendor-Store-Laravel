@@ -34,6 +34,7 @@ class CategoryRepository implements CategoryRepositoryInterface
         // $categories = Category::active()->paginate(2);
         // $categories = Category::status('archived')->paginate(2);
 
+
         $query = Category::query();
         $categories = Category::with('parent')
             // filter scope

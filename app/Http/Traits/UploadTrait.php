@@ -22,6 +22,7 @@ trait UploadTrait
 
         // ]);
 
+
         if ($request->hasFile($inputname)) {
 
             $file = $request->file($inputname);
@@ -32,5 +33,6 @@ trait UploadTrait
         }
 
         return $request->file($path);
+
     }
 }
