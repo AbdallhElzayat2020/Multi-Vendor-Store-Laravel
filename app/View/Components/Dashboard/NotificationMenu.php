@@ -23,9 +23,8 @@ class NotificationMenu extends Component
 
         $this->notification = $user->notifications()->take($count)->get();
 
-        $this->NewCount = $user->unreadNotifications()->count();
+        $this->NewCount = $user->unreadNotifications->count();
     }
-
 
     /**
      * Get the view / contents that represent the component.

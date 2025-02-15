@@ -12,7 +12,7 @@
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
 
-            <x-dashboard.notification-menu count="7"/>
+            <x-dashboard.notification-menu count="5"/>
 
             <li class="dropdown-footer">
                 <a href="#">Show all notifications</a>
