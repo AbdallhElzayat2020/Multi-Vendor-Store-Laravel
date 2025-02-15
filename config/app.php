@@ -167,12 +167,12 @@ return [
          */
 
         App\Providers\AppServiceProvider::class,
+        App\Providers\FortifyServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         //for Notification Broadcast by default was disActive
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
         // Repository Provider for Design Pattern Repositories
         App\Providers\RepositoryProvider::class,
     ])->toArray(),
