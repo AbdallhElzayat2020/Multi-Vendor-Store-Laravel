@@ -38,6 +38,7 @@ Route::get('/checkout', [CheckoutController::class, 'create'])->name('checkout')
 Route::post('/checkout', [CheckoutController::class, 'store']);
 
 
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -48,7 +49,7 @@ Route::middleware('auth')->group(function () {
 //
 //Route::post('checkout', [CheckoutController::class, 'store']);
 
-require __DIR__ . '/auth.php';
+//require __DIR__ . '/auth.php';
 
 require __DIR__ . '/dashboard.php';
 

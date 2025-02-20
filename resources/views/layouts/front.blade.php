@@ -35,7 +35,7 @@
 <header class="header navbar-area">
     <!-- Start Topbar -->
     <div class="topbar">
-        <div class="container">
+        <div class="container-lg">
             <div class="row align-items-center">
                 <div class="col-lg-4 col-md-4 col-12">
                     <div class="top-left">
@@ -71,26 +71,42 @@
                 <div class="col-lg-4 col-md-4 col-12">
                     <div class="top-middle">
                         <ul class="useful-links">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="about-us.html">About Us</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="{{route('home')}}">Home</a></li>
+                            <li><a href="javascript:void(0)">About Us</a></li>
+                            <li><a href="javascript:void(0)">Contact Us</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-12">
                     <div class="top-end">
-                        <div class="user">
-                            <i class="lni lni-user"></i>
-                            Hello
-                        </div>
-                        <ul class="user-login">
-                            <li>
-                                <a href="login.html">Sign In</a>
-                            </li>
-                            <li>
-                                <a href="register.html">Register</a>
-                            </li>
-                        </ul>
+                        @auth
+                            <div class="user">
+                                <i class="lni lni-user"></i>
+                                {{Auth::user()->name}}
+                            </div>
+                            <ul class="user-login">
+                                <li>
+                                    <a class="btn btn-danger text-white" href="javascript:void(0)"
+                                       onclick="event.preventDefault(); document.getElementById('logout').submit();">Logout</a>
+                                </li>
+                                <form action="{{route('logout')}}" method="post" id="logout">
+                                    @csrf
+                                </form>
+                            </ul>
+                        @else
+                            <div class="user">
+                                <i class="lni lni-user"></i>
+                                Hello
+                            </div>
+                            <ul class="user-login">
+                                <li>
+                                    <a href="{{route('login')}}">Sign In</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('register')}}">Register</a>
+                                </li>
+                            </ul>
+                        @endauth
                     </div>
                 </div>
             </div>
@@ -286,6 +302,7 @@
     <!-- End Header Bottom -->
 </header>
 <!-- End Header Area -->
+
 
 <!-- Start Breadcrumbs -->
 {{ $breadcrumb ?? '' }}

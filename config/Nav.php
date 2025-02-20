@@ -4,7 +4,7 @@
 return [
     [
         'icon' => 'bi bi-grid',
-        'route' => 'dashboard',
+        'route' => 'dashboard.dashboard',
         'title' => 'Dashboard',
         'badge' => 'New',
         'active' => 'dashboard',

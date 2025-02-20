@@ -6,13 +6,15 @@ use App\Http\Controllers\Dashboard\Products\ProductController;
 use App\Http\Controllers\Dashboard\Profile\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth.type:super-admin,admin');
 
 Route::group([
-    'prefix' => 'dashboard',
+    'middleware' => ['auth:admin'],
     'as' => 'dashboard.',
-    'middleware' => ['auth', 'auth.type:super-admin,admin'],
+    'prefix' => 'admin/dashboard',
 ], function () {
+
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
 
     // soft delete routes
     Route::get('categories/trash', [CategoryController::class, 'trash'])

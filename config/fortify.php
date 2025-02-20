@@ -73,7 +73,7 @@ return [
     |
     */
 
-    'home' => '/home',
+    'home' => '/',
 
     /*
     |--------------------------------------------------------------------------
@@ -89,6 +89,7 @@ return [
     'prefix' => '',
 
     'domain' => null,
+
 
     /*
     |--------------------------------------------------------------------------
@@ -129,7 +130,7 @@ return [
     | especially true if you're writing a custom single-page application.
     |
     */
-
+    //if I'm Using Api Make views false
     'views' => true,
 
     /*
@@ -145,10 +146,10 @@ return [
 
     'features' => [
         Features::registration(),
-        Features::resetPasswords(),
-        // Features::emailVerification(),
+        Features::resetPasswords(),// reset password
+        Features::emailVerification(), //email Verification
         Features::updateProfileInformation(),
-        Features::updatePasswords(),
+        Features::updatePasswords(), //update password
         Features::twoFactorAuthentication([
             'confirm' => true,
             'confirmPassword' => true,
