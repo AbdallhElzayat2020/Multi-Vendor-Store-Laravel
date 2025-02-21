@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+
 
 class Product extends Model
 {
@@ -18,7 +18,21 @@ class Product extends Model
     protected static function booted()
     {
         static::addGlobalScope(StoreScope::class);
+
+        static::creating(function ($product) {
+            $product->slug = Str::slug($product->name);
+        });
     }
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'image',
+        'deleted_at',
+    ];
+    protected $appends = [
+        'image_default',
+    ];
 
 //    scope for active products
     public function scopeActive(Builder $builder)
@@ -69,15 +83,15 @@ class Product extends Model
 
     public function getImageDefaultAttribute()
     {
-        return 'https://www.theseasonedhome.com/content/images/thumbs/default-image_450.png';
+//        return 'https://www.theseasonedhome.com/content/images/thumbs/default-image_450.png';
 
-        //         if (!$this->image) {
-        //             return 'https://www.theseasonedhome.com/content/images/thumbs/default-image_450.png';
-        //         }
-        //         if (Str::startsWith($this->image, ['http://', 'https://'])) {
-        //             return $this->image;
-        //         }
-        //         return asset('storage/' . $this->image);
+        if (!$this->image) {
+            return 'https://www.theseasonedhome.com/content/images/thumbs/default-image_450.png';
+        }
+        if (Str::startsWith($this->image, ['http://', 'https://'])) {
+            return $this->image;
+        }
+        return asset('storage/' . $this->image);
     }
 
     public function getSalePercentAttribute(): float|int
@@ -90,6 +104,58 @@ class Product extends Model
     }
 
 
+//    public function FilterScope(Builder $builder,$filter): Builder
+//    {
+////        return $query->when(request('category'), function ($query) {
+////            return $query->where('category_id', request('category'));
+////        })->when(request('store'), function ($query) {
+////            return $query->where('store_id', request('store'));
+////        })->when(request('tag'), function ($query) {
+////            return $query->whereHas('tags', function ($query) {
+////                return $query->where('tag_id', request('tag'));
+////            });
+////        });
+//
+//    }
 
 
+    public function scopeFilter(Builder $builder, $filter)
+    {
+
+        $options = array_merge([
+            'store_id' => null,
+            'category' => null,
+            'tag_id' => null,
+            'status' => 'active',
+        ], $filter);
+
+        $builder->when($options['status'], function ($query, $status) {
+            return $query->where('status', $status);
+        });
+
+        $builder->when($options['store_id'], function ($builder, $value) {
+            $builder->where('store_id', $value);
+        });
+        $builder->when($options['category'], function ($builder, $value) {
+            $builder->where('category_id', $value);
+        });
+
+        $builder->when($options['tag_id'], function ($builder, $value) {
+
+            $builder->whereExists(function ($query) use ($value) {
+                $query->select(1)
+                    ->from('product_tag')
+                    ->whereRaw('product_id = products.id')
+                    ->where('tag_id', $value);
+            });
+        });
+
+//             $builder->whereRaw('id in (select product_id from product_tag where tag_id = ?)', [$value]);
+//            $builder->whereRaw('EXISTS (select 1 from product_tag where product_tag.product_id = products.id and product_tag.tag_id = ?)', [$value]);
+
+//            $builder->whereHas('tags', function ($builder) use ($value) {
+//                $builder->whereIn('id', $value);
+//            });
+
+    }
 }
