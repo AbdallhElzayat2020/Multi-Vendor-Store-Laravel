@@ -20,6 +20,7 @@ class Product extends Model
         static::addGlobalScope(StoreScope::class);
     }
 
+//    scope for active products
     public function scopeActive(Builder $builder)
     {
         $builder->where('status', 'active');
@@ -87,4 +88,8 @@ class Product extends Model
 
         return round(100 - ($this->price / $this->compare_price) * 100, 2);
     }
+
+
+
+
 }
