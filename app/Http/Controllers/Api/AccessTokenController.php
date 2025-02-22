@@ -36,9 +36,33 @@ class AccessTokenController extends Controller
         ]);
     }
 
-    public function destroy($token)
+    public function destroy($token = null)
     {
         $user = Auth::guard('sanctum')->user();
 
+        //revoke all tokens
+        //$user->tokens()->delete();
+
+        if (null == $token) {
+
+            $user->currentAccessToken()->delete();
+            return response()->json([
+                'message' => 'Current device deleted successfully',
+                'status' => 200,
+            ]);
+        }
+
+        $personalAccessToken = PersonalAccessToken::findToken($token);
+
+        if ($user->id == $personalAccessToken->tokenable_id && get_class($user) == $personalAccessToken->tokenable_type) {
+            $personalAccessToken->delete();
+            return response()->json([
+                'message' => 'Logout successfully',
+                'status' => 200,
+            ]);
+        }
+
+
     }
+    
 }
