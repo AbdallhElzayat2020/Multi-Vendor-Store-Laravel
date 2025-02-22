@@ -3,28 +3,32 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProductRescource;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except('index', 'show');
+    }
 
     public function index(Request $request)
     {
-        return Product::with('category:id,name', 'store:id,name', 'tags')
+        $products = Product::with('category:id,name', 'store:id,name', 'tags')
             ->filter($request->query())
             ->paginate(10);
 
+        return ProductRescource::collection($products);
 
-//        return response()->json([
-//            'products' => $products,
-//            'status' => 200,
-//        ]);
+        //        return response()->json([
+        //            'products' => $products,
+        //            'status' => 200,
+        //        ]);
     }
 
     /**
@@ -49,16 +53,16 @@ class ProductsController extends Controller
             'message' => 'Product created successfully',
             'status' => 201,
         ]);
-//        $product = Product::create([
-//            'name' => $request->name,
-//            'description' => $request->description,
-//            'slug' => Str::slug($request->name),
-//            'price' => $request->price,
-//            'quantity' => $request->quantity,
-//            'status' => $request->status,
-//            'image' => $request->file('image')->store('products'),
-//            'compare_price' => $request->compare_price,
-//        ]);
+        //        $product = Product::create([
+        //            'name' => $request->name,
+        //            'description' => $request->description,
+        //            'slug' => Str::slug($request->name),
+        //            'price' => $request->price,
+        //            'quantity' => $request->quantity,
+        //            'status' => $request->status,
+        //            'image' => $request->file('image')->store('products'),
+        //            'compare_price' => $request->compare_price,
+        //        ]);
 
     }
 
@@ -68,8 +72,10 @@ class ProductsController extends Controller
     public function show(Product $product)
     {
 
-        return $product->load('category:id,name', 'store:id,name', 'tags:id,name');
-//        return Product::with('category:id,name', 'store:id,name', 'tags')->findOrFail($product);
+        return new ProductRescource($product);
+
+        //        return $product->load('category:id,name', 'store:id,name', 'tags:id,name');
+        //        return Product::with('category:id,name', 'store:id,name', 'tags')->findOrFail($product);
     }
 
     /**
@@ -92,7 +98,6 @@ class ProductsController extends Controller
             'product' => $product,
             'message' => 'Product updated successfully',
         ], 200);
-
     }
 
     /**
