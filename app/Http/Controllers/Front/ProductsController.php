@@ -16,7 +16,7 @@ class ProductsController extends Controller
 
     public function show(Product $product)
     {
-        if ($product->status != 'active') {
+        if ($product->status !== 'active') {
             abort(404);
         }
 

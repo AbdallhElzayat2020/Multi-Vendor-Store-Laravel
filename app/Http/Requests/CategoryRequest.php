@@ -3,15 +3,20 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
+    public function authorize()
     {
-        return true;
+        if ($this->route('category')) {
+            return Gate::authorize('categories.update');
+        }
+
+        return Gate::authorize('categories.create');
     }
 
     /**
@@ -29,7 +34,7 @@ class CategoryRequest extends FormRequest
             // 'parent_id' => 'nullable|integer|exists:categories,id',
             // 'image' => 'nullable|image|mimes:jpeg,png,jpg|max:1048576|mimetypes:mimetypes:image/jpeg,image/png,image/gif',
 
-            'name' => 'required|string|min:3|max:255|unique:categories,name,'.$this->route('category'),
+            'name' => 'required|string|min:3|max:255|unique:categories,name,' . $this->route('category'),
             'description' => 'nullable|string|max:500',
             'status' => 'required|in:archived,active',
             'parent_id' => 'nullable|integer|exists:categories,id',

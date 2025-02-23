@@ -35,7 +35,7 @@
 </div>
 {{-- Status --}}
 <div class="col-md-6">
-    
+
     {{-- <label for="flexRadioDefault"></label> --}}
     <x-form.label id="Status">Select Status</x-form.label>
 

@@ -50,7 +50,7 @@ class ProductRepository implements ProductRepositoryInterface
             $slug = Str::slug($t_name);
             $tag = Tag::where('slug', $slug)->first();
 
-            if (! $tag) {
+            if (!$tag) {
                 $tag = Tag::create([
                     'name' => $t_name,
                     'slug' => $slug,

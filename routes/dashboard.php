@@ -4,11 +4,12 @@ use App\Http\Controllers\Dashboard\Categories\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\Products\ProductController;
 use App\Http\Controllers\Dashboard\Profile\ProfileController;
+use App\Http\Controllers\Dashboard\Roles\RolesController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::group([
-    'middleware' => ['auth:admin'],
+    'middleware' => ['auth:admin,web'],
     'as' => 'dashboard.',
     'prefix' => 'admin/dashboard',
 ], function () {
@@ -29,6 +30,7 @@ Route::group([
     Route::resource('categories', CategoryController::class);
 
     Route::resource('products', ProductController::class);
+    Route::resource('roles', RolesController::class);
 
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
 

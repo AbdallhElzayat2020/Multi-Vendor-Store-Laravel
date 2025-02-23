@@ -7,6 +7,7 @@ use App\Http\Requests\CategoryRequest;
 use App\Interfaces\Categories\CategoryRepositoryInterface;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
 {
@@ -19,11 +20,17 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
+//        if (!Gate::allows('categories.view')) {
+//            abort(403);
+//        }
         return $this->category->index($request);
     }
 
     public function create()
     {
+//        if (!Gate::allows('categories.create')) {
+//            abort(403);
+//        }
         return $this->category->create();
     }
 

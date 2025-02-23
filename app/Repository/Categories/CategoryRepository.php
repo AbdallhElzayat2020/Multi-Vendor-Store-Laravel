@@ -6,6 +6,7 @@ use App\Interfaces\Categories\CategoryRepositoryInterface;
 use App\Models\Category;
 use Exception;
 use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -35,18 +36,21 @@ class CategoryRepository implements CategoryRepositoryInterface
         // $categories = Category::status('archived')->paginate(2);
 
 
+        if (!Gate::allows('categories.view')) {
+            abort(403);
+        }
         $query = Category::query();
         $categories = Category::with('parent')
             // filter scope
             ->filter($request->query())
             ->paginate(10);
 
-        // return $categories;
         return view('dashboard.Categories.index', compact('categories'));
     }
 
     public function create()
     {
+//        Gate::authorize('categories.create');
         $parents = Category::all();
         $category = new Category; // for create category face;
 
@@ -55,7 +59,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function store($request)
     {
-
+//        Gate::authorize('categories.create');
         // Category::create($request->all());
 
         try {
@@ -90,12 +94,15 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function show(Category $category)
     {
+        if (!Gate::allows('categories.view')) {
+            abort(403);
+        }
         return view('dashboard.Categories.show', compact('category'));
     }
 
     public function edit($id)
     {
-
+        Gate::authorize('categories.update');
         try {
             $category = Category::findOrFail($id);
 
@@ -156,7 +163,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function destroy($id)
     {
-
+        Gate::authorize('categories.delete');
         try {
             $category = Category::findOrFail($id);
             $category->delete();

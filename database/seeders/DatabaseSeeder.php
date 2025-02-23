@@ -25,12 +25,12 @@ class DatabaseSeeder extends Seeder
 //         \App\Models\Category::factory(10)->create();
 //
 //         \App\Models\Product::factory(100)->create();
+//
+//         \App\Models\Admin::factory(3)->create();
 
-         \App\Models\Admin::factory(3)->create();
-
-//        $this->call([
-//            UserSeeder::class,
-//        ]);
+        $this->call([
+            UserSeeder::class,
+        ]);
 
 
 

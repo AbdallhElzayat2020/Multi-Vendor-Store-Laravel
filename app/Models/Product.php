@@ -83,15 +83,15 @@ class Product extends Model
 
     public function getImageDefaultAttribute()
     {
-//        return 'https://www.theseasonedhome.com/content/images/thumbs/default-image_450.png';
+        return 'https://www.theseasonedhome.com/content/images/thumbs/default-image_450.png';
 
-        if (!$this->image) {
-            return 'https://www.theseasonedhome.com/content/images/thumbs/default-image_450.png';
-        }
-        if (Str::startsWith($this->image, ['http://', 'https://'])) {
-            return $this->image;
-        }
-        return asset('storage/' . $this->image);
+//        if (!$this->image) {
+//            return 'https://www.theseasonedhome.com/content/images/thumbs/default-image_450.png';
+//        }
+//        if (Str::startsWith($this->image, ['http://', 'https://'])) {
+//            return $this->image;
+//        }
+//        return asset('storage/' . $this->image);
     }
 
     public function getSalePercentAttribute(): float|int

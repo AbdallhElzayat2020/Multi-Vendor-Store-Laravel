@@ -52,28 +52,23 @@
                                     </select>
                                 </div>
                             </li>
-                            <li>
-                                <div class="select-position">
-                                    <select id="select5">
-                                        <option value="0" selected>English</option>
-                                        <option value="1">Español</option>
-                                        <option value="2">Filipino</option>
-                                        <option value="3">Français</option>
-                                        <option value="4">العربية</option>
-                                        <option value="5">हिन्दी</option>
-                                        <option value="6">বাংলা</option>
-                                    </select>
-                                </div>
-                            </li>
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                <li>
+                                    <a href="{{ LaravelLocalization::getLocalizedURL($localeCode) }}">
+                                        {{ $properties['native'] }}
+                                    </a>
+                                </li>
+                            @endforeach
+
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-12">
                     <div class="top-middle">
                         <ul class="useful-links">
-                            <li><a href="{{route('home')}}">Home</a></li>
-                            <li><a href="javascript:void(0)">About Us</a></li>
-                            <li><a href="javascript:void(0)">Contact Us</a></li>
+                            <li><a href="{{route('home')}}">{{__('Home')}}</a></li>
+                            <li><a href="javascript:void(0)">{{__('home.about')}}</a></li>
+                            <li><a href="javascript:void(0)">{{__('home.contact')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -87,7 +82,7 @@
                             <ul class="user-login">
                                 <li>
                                     <a class="btn btn-danger text-white" href="javascript:void(0)"
-                                       onclick="event.preventDefault(); document.getElementById('logout').submit();">Logout</a>
+                                       onclick="event.preventDefault(); document.getElementById('logout').submit();">{{__('home.Logout')}}</a>
                                 </li>
                                 <form action="{{route('logout')}}" method="post" id="logout">
                                     @csrf
@@ -100,10 +95,10 @@
                             </div>
                             <ul class="user-login">
                                 <li>
-                                    <a href="{{route('login')}}">Sign In</a>
+                                    <a href="{{route('login')}}">{{__('home.Login')}}</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('register')}}">Register</a>
+                                    <a href="{{route('register')}}">{{__('home.Register')}}</a>
                                 </li>
                             </ul>
                         @endauth
@@ -224,7 +219,7 @@
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                             <ul id="nav" class="navbar-nav ms-auto">
                                 <li class="nav-item">
-                                    <a href="index.html" aria-label="Toggle navigation">Home</a>
+                                    <a href="index.html" aria-label="Toggle navigation">{{__('home.home')}}</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="dd-menu active collapsed" href="javascript:void(0)"
@@ -232,10 +227,12 @@
                                        aria-controls="navbarSupportedContent" aria-expanded="false"
                                        aria-label="Toggle navigation">Pages</a>
                                     <ul class="sub-menu collapse" id="submenu-1-2">
-                                        <li class="nav-item"><a href="about-us.html">About Us</a></li>
+                                        <li class="nav-item"><a href="about-us.html">{{__('home.about')}}</a></li>
                                         <li class="nav-item"><a href="faq.html">Faq</a></li>
-                                        <li class="nav-item active"><a href="login.html">Login</a></li>
-                                        <li class="nav-item"><a href="register.html">Register</a></li>
+                                        <li class="nav-item active"><a
+                                                href="{{route('login')}}">{{__('home.Login')}}</a></li>
+                                        <li class="nav-item"><a href="{{route('register')}}">{{__('home.Register')}}</a>
+                                        </li>
                                         <li class="nav-item"><a href="mail-success.html">Mail Success</a></li>
                                         <li class="nav-item"><a href="404.html">404 Error</a></li>
                                     </ul>
