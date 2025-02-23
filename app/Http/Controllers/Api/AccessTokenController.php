@@ -30,6 +30,7 @@ class AccessTokenController extends Controller
                 'user' => $user,
             ]);
         }
+
         return response()->json([
             'message' => 'invalid credentials',
             'status' => 401,
@@ -43,7 +44,7 @@ class AccessTokenController extends Controller
         //revoke all tokens
         //$user->tokens()->delete();
 
-        if (null == $token) {
+        if (null === $token) {
 
             $user->currentAccessToken()->delete();
             return response()->json([
@@ -61,8 +62,6 @@ class AccessTokenController extends Controller
                 'status' => 200,
             ]);
         }
-
-
     }
-    
+
 }
