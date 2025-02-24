@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\Products;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\Products\ProductRepositoryInterface;
+use App\Jobs\ImportProducts;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,6 +15,9 @@ class ProductController extends Controller
     {
         $this->product = $product;
     }
+
+
+
 
     /**
      * Display a listing of the resource.
