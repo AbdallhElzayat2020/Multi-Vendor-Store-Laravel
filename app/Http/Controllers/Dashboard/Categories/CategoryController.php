@@ -13,6 +13,11 @@ class CategoryController extends Controller
 {
     protected $category;
 
+    public function test()
+    {
+
+    }
+
     public function __construct(CategoryRepositoryInterface $category)
     {
         $this->category = $category;
