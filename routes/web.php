@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\SocialLoginController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\CheckoutController;
 use App\Http\Controllers\Front\HomeController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\Front\ProductsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use  App\Http\Controllers\SocialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +49,13 @@ Route::group(
     });
 
 });
+
+
+Route::get('auth/{provider}/redirect', [SocialLoginController::class, 'redirect'])->name('auth.socialite.redirect');
+
+Route::get('auth/{provider}/callback', [SocialLoginController::class, 'callback'])->name('auth.socialite.callback');
+
+Route::get('auth/{provider}/user', [SocialController::class, 'index']);
 
 
 //require __DIR__ . '/auth.php';

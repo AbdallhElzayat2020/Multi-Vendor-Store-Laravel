@@ -28,8 +28,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'phone_number',
-        'store_id',
+        'two_factor_confirmed_at',
+        'two_factor_recovery_codes',
+        'two_factor_secret',
+        'provider',
+        'provider_id',
+        'provider_token',
     ];
 
     /**
@@ -63,5 +67,15 @@ class User extends Authenticatable implements MustVerifyEmail
             ->withDefault();
     }
 
+
+    public function setProviderTokenAttribute($value)
+    {
+        $this->attributes['provider_token'] = encrypt($value);
+    }
+
+    public function getProviderTokenAttribute($value)
+    {
+        return decrypt($value);
+    }
 
 }

@@ -25,6 +25,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
+                    @if(Session::has('error'))
+                        <div class="alert alert-success" role="alert">
+                            {{Session::get('error')}}
+                        </div>
+                    @endif
                     <form class="card login-form" method="post" action="">
                         @csrf
                         <div class="card-body">
@@ -48,7 +53,8 @@
                                         </a>
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-12">
-                                        <a class="btn google-btn" href="javascript:void(0)">
+                                        <a class="btn google-btn"
+                                           href="{{ route('auth.socialite.redirect','google') }}">
                                             <i class="lni lni-google"></i>
                                             Google login
                                         </a>
