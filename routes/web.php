@@ -55,6 +55,7 @@ Route::get('auth/{provider}/redirect', [SocialLoginController::class, 'redirect'
 
 Route::get('auth/{provider}/callback', [SocialLoginController::class, 'callback'])->name('auth.socialite.callback');
 
+//get Data for user when login with social media from His token
 Route::get('auth/{provider}/user', [SocialController::class, 'index']);
 
 
